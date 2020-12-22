@@ -51,12 +51,14 @@
 	"../headers/funcoes_menus.h"
 	"../headers/funcoes_auxiliares.h"
 
-1608557565 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
+1608673632 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"headers/funcoes_menus.h"
+	"headers/constantes.h"
 
-1608557560 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
+1608671248 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
+	"constantes.h"
 
 1608557496 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_auxiliares.c
 	<stdio.h>
@@ -66,12 +68,28 @@
 1608557496 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_auxiliares.h
 	"../headers/constantes.h"
 
-1608557496 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
+1608674413 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
 
-1608557556 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
+1608675909 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	"../headers/funcoes_menus.h"
+	"../headers/funcoes_uc.h"
 	"../headers/funcoes_auxiliares.h"
+
+1608662702 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_uc.h
+	"constantes.h"
+
+1608674954 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_uc.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../headers/funcoes_uc.h"
+	"../headers/funcoes_auxiliares.h"
+
+1608637749 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\dados.c
+	<stdio.h>
+	<stdlib.h>
+	"../headers/constantes.h"
 
