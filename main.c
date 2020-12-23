@@ -2,9 +2,13 @@
 #include <stdlib.h>
 
 #include "headers/funcoes_menus.h"
+#include "headers/constantes.h"
 
 int main()
 {
+
+    tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
+    int numUCs = 0;
 
     char op;
 
@@ -17,12 +21,15 @@ int main()
         {
         case 'U':
             system("@cls||clear");
-            menuUC();
+            menuUC(uniCurriculares, &numUCs);
             break;
         case 'A':
+            system("@cls||clear");
 
             break;
         case 'E':
+            system("@cls||clear");
+
             break;
         case 'F':
             break;
