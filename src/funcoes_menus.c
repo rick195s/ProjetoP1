@@ -7,6 +7,7 @@
 #include "../headers/funcoes_menus.h"
 #include "../headers/funcoes_uc.h"
 #include "../headers/funcoes_auxiliares.h"
+#include "../headers/funcoes_ficheiros.h"
 
 
 char menuPrincipal()
@@ -28,13 +29,40 @@ char menuPrincipal()
 
 }
 
-void menuUC(tipoUnidadeCurricular UCs[],int *numUCs)
+void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 {
 
     char op;
+    //int i,j;
 
     do
     {
+        lerFiheiroBinarioUC(uniCurriculares, numUCs);
+
+
+        /*DEBUG MOSTARR DADOS LIDOS
+
+        printf("\n\nQuantidade de UC: %d", *numUCs);
+
+
+        for(i=0; i<*numUCs; i++)
+        {
+            printf("\ndesignacao %s", uniCurriculares[i].designacao);
+            printf("\ntipo %d", uniCurriculares[i].tipoUC);
+            printf("\nsemestre %d", uniCurriculares[i].semestre);
+            printf("\nregime %d", uniCurriculares[i].regime);
+            for(j=0; j<3; j++)
+            {
+                printf("\ndesignacao %s",  uniCurriculares[i].aulasOnline[j].designacao);
+                printf("\nquantidade %d",  uniCurriculares[i].aulasOnline[j].quantidade );
+                printf("\nduracao %d",  uniCurriculares[i].aulasOnline[j].duracao );
+
+
+            }
+        }
+        */
+
+
         printf("\n************************ Menu Unidade Curriular ************************");
 
 
@@ -53,10 +81,13 @@ void menuUC(tipoUnidadeCurricular UCs[],int *numUCs)
 
         case 'I':
 
-            if(*numUCs<MAX_UC){
-                *numUCs=inserirUc( UCs, *numUCs);
+            if(*numUCs<MAX_UC)
+            {
+                *numUCs=inserirUc( uniCurriculares, *numUCs);
 
-            }else{
+            }
+            else
+            {
                 system("@cls||clear");
                 printf("\n\n\n\t\tO numero maximo de UCs foi alcancado\n\n\n");
             }

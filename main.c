@@ -7,7 +7,7 @@
 int main()
 {
 
-    tipoUnidadeCurricular UCs[MAX_UC] = {0};
+    tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
     int numUCs = 0;
 
     char op;
@@ -21,7 +21,7 @@ int main()
         {
         case 'U':
             system("@cls||clear");
-            menuUC(UCs, &numUCs);
+            menuUC(uniCurriculares, &numUCs);
             break;
         case 'A':
             system("@cls||clear");

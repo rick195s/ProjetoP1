@@ -4,7 +4,7 @@
 #include "constantes.h"
 
 char menuPrincipal();
-void menuUC(tipoUnidadeCurricular UCs[], int *numUCs);
+void menuUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs);
 
 
 #endif // FUNCOES_MENUS_H_INCLUDED

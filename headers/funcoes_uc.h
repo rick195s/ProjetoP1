@@ -3,6 +3,9 @@
 
 #include "constantes.h"
 
-int inserirUc(tipoUnidadeCurricular UCs[], int numUCs);
+int gerarCodigoUnico(tipoUnidadeCurricular uniCurriulares[], int numUCs);
+tipoUnidadeCurricular lerDadosUC();
+int inserirUc(tipoUnidadeCurricular uniCurriculares[], int numUCs);
+
 
 #endif // FUNCOES_UC_H_INCLUDED
