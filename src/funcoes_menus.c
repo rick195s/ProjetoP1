@@ -33,35 +33,11 @@ void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 {
 
     char op;
-    //int i,j;
+    int i;
 
     do
     {
         lerFiheiroBinarioUC(uniCurriculares, numUCs);
-
-
-        /*DEBUG MOSTARR DADOS LIDOS
-
-        printf("\n\nQuantidade de UC: %d", *numUCs);
-
-
-        for(i=0; i<*numUCs; i++)
-        {
-            printf("\ndesignacao %s", uniCurriculares[i].designacao);
-            printf("\ntipo %d", uniCurriculares[i].tipoUC);
-            printf("\nsemestre %d", uniCurriculares[i].semestre);
-            printf("\nregime %d", uniCurriculares[i].regime);
-            for(j=0; j<3; j++)
-            {
-                printf("\ndesignacao %s",  uniCurriculares[i].aulasOnline[j].designacao);
-                printf("\nquantidade %d",  uniCurriculares[i].aulasOnline[j].quantidade );
-                printf("\nduracao %d",  uniCurriculares[i].aulasOnline[j].duracao );
-
-
-            }
-        }
-        */
-
 
         printf("\n************************ Menu Unidade Curriular ************************");
 
@@ -69,7 +45,7 @@ void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 
         printf("\n\nI - Inserir UCs");
         printf("\n\nA - Alterar UC");
-        printf("\n\nE - Listar UC");
+        printf("\n\nL - Listar UC");
         printf("\n\nF - Voltar atras\n\nOpcao--> ");
 
         scanf("%c", &op);
@@ -83,7 +59,7 @@ void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 
             if(*numUCs<MAX_UC)
             {
-                *numUCs=inserirUc( uniCurriculares, *numUCs);
+                *numUCs=inserirUCs( uniCurriculares, *numUCs);
 
             }
             else
@@ -94,9 +70,35 @@ void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 
             break;
         case 'A':
+            if(*numUCs == 0)
+            {
+                system("@cls||clear");
+                printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
 
+            }
+            else
+            {
+                system("@cls||clear");
+                alterarUC(uniCurriculares, *numUCs);
+            }
             break;
-        case 'E':
+        case 'L':
+            if(*numUCs == 0)
+            {
+                system("@cls||clear");
+                printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
+
+            }
+            else
+            {
+                system("@cls||clear");
+                for(i=0; i<*numUCs; i++)
+                {
+                    listarUC(uniCurriculares[i],1);
+                }
+
+
+            }
             break;
         case 'F':
             break;
