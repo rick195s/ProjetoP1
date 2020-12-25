@@ -8,22 +8,128 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 
-int gerarCodigoUnico(tipoUnidadeCurricular uniCurriulares[], int numUCs)
+
+void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
+{
+
+    /*
+    Caso a função receba por parametro a variável "detalhes" com o valor 1
+    a função irá mostrar mais detalhes relativos à unidade curricular
+    */
+
+    int i;
+
+
+    if(detalhes == 1){
+
+
+    }
+
+    printf("\n\nDados da UC:");
+    printf("\n\n\tCodigo: %d", uniCurricular.codigo);
+    printf("\n\tDesignacao: %s", uniCurricular.designacao);
+    if(uniCurricular.tipoUC == 0){
+        printf("\n\tTipo: obrigatoria");
+
+    }else if(uniCurricular.tipoUC == 1){
+        printf("\n\tTipo: opcional");
+
+    }
+    if(uniCurricular.regime == 0){
+        printf("\n\tRegime: diurno");
+
+    }else if(uniCurricular.regime == 1){
+        printf("\n\tRegime: pos-laboral");
+
+    }
+
+    printf("\n\tSemestre: %d", uniCurricular.semestre);
+    printf("\n\tTipo de Aulas:");
+    for(i=0; i<TIPOS_AULA; i++)
+    {
+        if(uniCurricular.aulasOnline[i].quantidade != 0)
+        {
+
+            printf("\n\t\t%s:",  uniCurricular.aulasOnline[i].designacao);
+            printf("\n\t\t\tQuantidade: %d aula(s)",  uniCurricular.aulasOnline[i].quantidade );
+            printf("\n\t\t\tDuracao: %d minuto(s)",  uniCurricular.aulasOnline[i].duracao );
+        }
+
+    }
+
+
+}
+
+int prourarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
+{
+
+    /*
+    Devolve a posição onde se encontra a unidade curricular
+    com o codigo inserido pelo utilizador ou -1 caso não encontre
+    */
+
+    int codigoUC,i,posicao=-1;
+
+    system("@cls||clear");
+    codigoUC=lerInteiro("\n\nInsira o codigo da UC que pretende alterar",1000,9999);
+
+    for(i=0; i<numUCs; i++)
+    {
+
+        if(uniCurriculares[i].codigo == codigoUC)
+        {
+            posicao = i;
+
+        }
+
+    }
+
+    return posicao;
+
+}
+
+void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
+{
+    int posicao,codigo;
+
+    posicao=prourarUC(uniCurriculares, numUCs);
+    if(posicao != -1)
+    {
+
+        listarUC(uniCurriculares[posicao],0);
+        codigo=uniCurriculares[posicao].codigo;
+        uniCurriculares[posicao]=lerDadosUC();
+        uniCurriculares[posicao].codigo=codigo;
+        escreverFiheiroBinarioUC(uniCurriculares, numUCs);
+    }
+    else
+    {
+        printf("\n\nNao existe nenhuma unidade curricular com o codigo que introduziu");
+
+    }
+
+
+}
+
+
+int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
     int codigo, unico,i;
 
     /*Caso exista uma UC com o codigo igual ao gerado o programa irá
-    continuar a gerar até não haver códigos de UCs iguais  */
+    continuar a gerar até não haver códigos de UCs iguais
+    */
 
     do
     {
         unico = 1;
+        //Gera um Codigo entre 1000 e 9999
         codigo = (rand() %(9999-1000+1))+1000;
 
-        for(i=0;i<numUCs;i++)
+        for(i=0; i<numUCs; i++)
         {
-            if(uniCurriulares[i].codigo == codigo)
+            if(uniCurriculares[i].codigo == codigo)
             {
                 unico = 0;
             }
@@ -74,7 +180,7 @@ tipoUnidadeCurricular lerDadosUC()
 }
 
 
-int inserirUc(tipoUnidadeCurricular uniCurriculares[], int numUCs)
+int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
     int up_numUCs, quantidadeUCs,i;
@@ -92,7 +198,7 @@ int inserirUc(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         uniCurriculares[up_numUCs] = lerDadosUC();
 
         /*O ccdigo da UC só é gerada após a introdução dos dados pelo utilizador
-        para a esse campo não ser alterado com dados aleatórios que estejam na memória*/
+        para esse campo não ser alterado com dados aleatórios que estejam na memória*/
 
         uniCurriculares[up_numUCs].codigo = gerarCodigoUnico(uniCurriculares, up_numUCs);
         up_numUCs++;

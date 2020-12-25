@@ -3,9 +3,11 @@
 
 #include "constantes.h"
 
-int gerarCodigoUnico(tipoUnidadeCurricular uniCurriulares[], int numUCs);
+int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs);
 tipoUnidadeCurricular lerDadosUC();
-int inserirUc(tipoUnidadeCurricular uniCurriculares[], int numUCs);
-
+int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs);
+void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs);
+int prourarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs);
+void listarUC(tipoUnidadeCurricular uniCurricular, int detalhes);
 
 #endif // FUNCOES_UC_H_INCLUDED
