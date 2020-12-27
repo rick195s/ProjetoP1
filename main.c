@@ -3,13 +3,15 @@
 
 #include "headers/funcoes_menus.h"
 #include "headers/constantes.h"
+#include "headers/funcoes_ficheiros.h"
 
 int main()
 {
 
     tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
-    int numUCs = 0;
-
+    tipoAulaOnline aulasOnline[MAX_AULAS] = {0};
+    int numUCs = 0, numAulas = 0;
+    lerFiheiroBinarioUC(uniCurriculares, &numUCs);
     char op;
 
 
@@ -25,7 +27,7 @@ int main()
             break;
         case 'A':
             system("@cls||clear");
-
+            menuAulas(aulasOnline, &numAulas);
             break;
         case 'E':
             system("@cls||clear");

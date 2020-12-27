@@ -101,41 +101,54 @@
 1608557496 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_auxiliares.h
 	"../headers/constantes.h"
 
-1608759162 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
+1608985770 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
 
-1608759162 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
+1609093888 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"headers/funcoes_menus.h"
 	"headers/constantes.h"
+	"headers/funcoes_ficheiros.h"
 
-1608759162 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
+1608989813 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
 	"constantes.h"
 
-1608926936 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
+1609093854 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	"../headers/funcoes_menus.h"
 	"../headers/funcoes_uc.h"
+	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_auxiliares.h"
 	"../headers/funcoes_ficheiros.h"
 
-1608926850 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_uc.h
+1609092804 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_uc.h
 	"constantes.h"
 
-1608900781 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_ficheiros.c
+1609023155 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_ficheiros.c
 	<stdio.h>
 	<string.h>
 	"../headers/funcoes_ficheiros.h"
 
-1608759162 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_ficheiros.h
+1609023055 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_ficheiros.h
 	"constantes.h"
 
-1608927103 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_uc.c
+1609093865 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_uc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"../headers/funcoes_uc.h"
+	"../headers/funcoes_ficheiros.h"
+	"../headers/funcoes_auxiliares.h"
+
+1609092715 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_aulas.h
+	"constantes.h"
+
+1609093679 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_aulas.c
+	<stdio.h>
+	<stdlib.h>
+	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_uc.h"
 	"../headers/funcoes_ficheiros.h"
 	"../headers/funcoes_auxiliares.h"

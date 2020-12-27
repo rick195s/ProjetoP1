@@ -32,11 +32,15 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="headers/constantes.h" />
+		<Unit filename="headers/funcoes_aulas.h" />
 		<Unit filename="headers/funcoes_auxiliares.h" />
 		<Unit filename="headers/funcoes_ficheiros.h" />
 		<Unit filename="headers/funcoes_menus.h" />
 		<Unit filename="headers/funcoes_uc.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/funcoes_aulas.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/funcoes_auxiliares.c">
