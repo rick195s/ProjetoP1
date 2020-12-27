@@ -5,6 +5,7 @@
 
 char menuPrincipal();
 void menuUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs);
+void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas);
 
 
 #endif // FUNCOES_MENUS_H_INCLUDED

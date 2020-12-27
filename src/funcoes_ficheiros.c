@@ -5,6 +5,43 @@
 #include "../headers/funcoes_ficheiros.h"
 
 
+
+void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAulas)
+{
+
+
+    FILE *ficheiro;
+
+    int erro,numEscrito;
+
+    ficheiro = fopen("ficheiros/AulasOnline.dat", "wb");
+
+    if(ficheiro == NULL)
+    {
+        printf("\n\nOcorreu um erro ao abrir o ficheiro das aulas online");
+    }
+    else
+    {
+        //Escreve o número de aulas online existentes até ao momento no ficheiro
+        fwrite(&numAulas, sizeof(int), 1, ficheiro);
+
+        //Escreve todas as aulas online existentes até ao momento no ficheiro
+        numEscrito=fwrite(aulasOnline, sizeof(tipoAulaOnline), numAulas, ficheiro);
+        printf("\n\t\t\tElementos salvos: %d\n", numEscrito);
+
+
+        erro = fclose(ficheiro);
+
+        if(erro != 0)
+        {
+
+            printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+        }
+    }
+
+}
+
+
 void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs){
 
 

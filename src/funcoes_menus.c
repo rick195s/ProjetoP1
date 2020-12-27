@@ -6,6 +6,7 @@
 
 #include "../headers/funcoes_menus.h"
 #include "../headers/funcoes_uc.h"
+#include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_auxiliares.h"
 #include "../headers/funcoes_ficheiros.h"
 
@@ -29,6 +30,58 @@ char menuPrincipal()
 
 }
 
+void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas)
+{
+
+    char op;
+
+
+    do
+    {
+
+
+        printf("\n************************ Menu das Aulas Online ************************");
+
+
+
+        printf("\n\nA - Agendar Aulas Online");
+        printf("\n\nI - Iniciar Aula Online");
+        printf("\n\nT - Terminar Aula Online");
+        printf("\n\nL - Listar Aulas Online");
+        printf("\n\nF - Voltar atras\n\nOpcao--> ");
+
+        scanf("%c", &op);
+        op=toupper(op);
+        limpaBufferStdin();
+
+        switch(op)
+        {
+        case 'A':
+            *numAulas=agendarAulaOnline(aulasOnline, *numAulas);
+            break;
+        case 'I':
+
+            break;
+        case 'T':
+
+            break;
+
+        case 'L':
+
+            break;
+        case 'F':
+            break;
+        default:
+            system("@cls||clear");
+            printf("\n\n\n\t\tOpcao invalida\n\n\n");
+        }
+    }
+    while(op!='F');
+
+
+
+}
+
 void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 {
 
@@ -37,7 +90,6 @@ void menuUC(tipoUnidadeCurricular uniCurriculares[],int *numUCs)
 
     do
     {
-        lerFiheiroBinarioUC(uniCurriculares, numUCs);
 
         printf("\n************************ Menu Unidade Curriular ************************");
 

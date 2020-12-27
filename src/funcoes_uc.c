@@ -8,6 +8,16 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 
+/*
+void obterUC(tipoUnidadeCurricular *uniCurricular, int posicao)
+{
+
+    tipoUnidadeCurricular uniCurriculares[MAX_UC];
+
+    lerFiheiroBinarioUC(uniCurriculares);
+    *uniCurricular=uniCurriculares[posicao];
+
+}*/
 
 void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
 {
@@ -20,7 +30,8 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
     int i;
 
 
-    if(detalhes == 1){
+    if(detalhes == 1)
+    {
 
 
     }
@@ -28,17 +39,23 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
     printf("\n\nDados da UC:");
     printf("\n\n\tCodigo: %d", uniCurricular.codigo);
     printf("\n\tDesignacao: %s", uniCurricular.designacao);
-    if(uniCurricular.tipoUC == 0){
+    if(uniCurricular.tipoUC == 0)
+    {
         printf("\n\tTipo: obrigatoria");
 
-    }else if(uniCurricular.tipoUC == 1){
+    }
+    else if(uniCurricular.tipoUC == 1)
+    {
         printf("\n\tTipo: opcional");
 
     }
-    if(uniCurricular.regime == 0){
+    if(uniCurricular.regime == 0)
+    {
         printf("\n\tRegime: diurno");
 
-    }else if(uniCurricular.regime == 1){
+    }
+    else if(uniCurricular.regime == 1)
+    {
         printf("\n\tRegime: pos-laboral");
 
     }
@@ -60,18 +77,24 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
 
 }
 
-int prourarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
+int procurarUC(tipoUnidadeCurricular *uniCurricular, int codigoUC, int devolverUC)
 {
 
     /*
-    Devolve a posição onde se encontra a unidade curricular
-    com o codigo inserido pelo utilizador ou -1 caso não encontre
+    Esta função devolve a posição onde se encontra a unidade curricular com o codigo recebido
+    pelo argumento "codigoUC" ou -1 caso não encontre. Se o argumento "devolverUC" estiver a 1 o
+    argumento "uniCurricular" irá ser alterado e passar a conter a unidade curricular
+    encontrada, senão o argumento uniCurricular irá conter lixo. Decedi  implementar esta
+    funcionalidade pois quando é criada uma aula online é preciso saber o tipo de aulas da
+    uc e o seu regime logo se fosse criar outra funcao que devolvesse estes dados iria estar
+    a aceder duas vezes a fiheiros "memoria" na função "agendarAulaOnline", usava a funcao
+    "procurarUC" e "obrterUC", tornando assim a execução mais lenta.
     */
 
-    int codigoUC,i,posicao=-1;
+    tipoUnidadeCurricular uniCurriculares[MAX_UC];
+    int i,posicao=-1,numUCs;
 
-    system("@cls||clear");
-    codigoUC=lerInteiro("\n\nInsira o codigo da UC que pretende alterar",1000,9999);
+    lerFiheiroBinarioUC(uniCurriculares,&numUCs);
 
     for(i=0; i<numUCs; i++)
     {
@@ -79,10 +102,15 @@ int prourarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         if(uniCurriculares[i].codigo == codigoUC)
         {
             posicao = i;
+            if(devolverUC == 1)
+            {
+                *uniCurricular = uniCurriculares[i];
+            }
 
         }
 
     }
+
 
     return posicao;
 
@@ -92,11 +120,23 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
     int posicao,codigo;
 
-    posicao=prourarUC(uniCurriculares, numUCs);
+    system("@cls||clear");
+    codigo=lerInteiro("\n\nInsira o codigo da UC que pretende alterar",1000,9999);
+    /*
+    Ao chamar a função "procurarUC" é possível guardar a UC que foi encontra
+    no primeiro argumento dessa mesma função mas neste caso como não é
+    pretendida essa alteração é enviada uma variavél qualquer do tipoUnidadeCurricular
+    para a função, sendo que ela não vai ser alterada.
+    */
+    posicao=procurarUC(&uniCurriculares[0],codigo,0);
     if(posicao != -1)
     {
-
+        //Mostra a unidade curricular que foi encontrada
         listarUC(uniCurriculares[posicao],0);
+        /*
+        Guarda o código da unidade curricular numa variavel local para depois
+        de a mesma ser alterada continuar com o mesmo código
+        */
         codigo=uniCurriculares[posicao].codigo;
         uniCurriculares[posicao]=lerDadosUC();
         uniCurriculares[posicao].codigo=codigo;
@@ -104,7 +144,7 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     }
     else
     {
-        printf("\n\nNao existe nenhuma unidade curricular com o codigo que introduziu");
+        printf("\n\nNao existe nenhuma unidade curricular com o codigo igual ao que introduziu");
 
     }
 
@@ -140,23 +180,19 @@ int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     return codigo;
 }
 
-tipoUnidadeCurricular lerDadosUC()
+void lerUCTipoAulas(tipoAulas tipoAulas[])
 {
 
-    tipoUnidadeCurricular uniCurricular;
+
     int j;
+    /*
+    Nesta parte do código é copiado para o campo do vetor "designacao" os caracteres
+    que representam os tipos de aula existentes
+    */
 
-    lerString("\n\nInsira a designacao da UC: ", uniCurricular.designacao, MAX_STRING);
-    uniCurricular.tipoUC = lerInteiro("\n\nIndique o tipo de UC\n\n0- Opcional\n\n1- Obrigatoria\n\n ",0,1);
-    uniCurricular.semestre = lerInteiro("\n\nIndique o semestre a que esta UC pertence ",1,6);
-    uniCurricular.regime = lerInteiro("\n\nIndique o requime da UC\n\n0- diurno\n\n1- pos-laboral\n\n ",0,1);
-
-    /*Nesta parte do código é copiado para o campo do vetor "designacao" os caracteres
-    que representam os tipos de aula existentes*/
-
-    strcpy(uniCurricular.aulasOnline[0].designacao, "T");
-    strcpy(uniCurricular.aulasOnline[1].designacao, "TP");
-    strcpy(uniCurricular.aulasOnline[2].designacao, "PL");
+    strcpy(tipoAulas[0].designacao, "T");
+    strcpy(tipoAulas[1].designacao, "TP");
+    strcpy(tipoAulas[2].designacao, "PL");
 
 
     for(j=0; j<TIPOS_AULA; j++)
@@ -164,17 +200,32 @@ tipoUnidadeCurricular lerDadosUC()
 
         /*Se o utilizador indicar que não existem aulas, ou seja inserir 0, para um tipo de aula
         a duracao da mesma terá um valor aleatório */
-        printf("\n\nIndique a quantidade de aulas de %s da UC", uniCurricular.aulasOnline[j].designacao );
-        uniCurricular.aulasOnline[j].quantidade = lerInteiro("",0,200);
+        printf("\n\nIndique a quantidade de aulas de %s da UC", tipoAulas[j].designacao );
+        tipoAulas[j].quantidade = lerInteiro("",0,MAX_AULAS_POR_TIPO);
 
-        if(uniCurricular.aulasOnline[j].quantidade > 0)
+        if(tipoAulas[j].quantidade > 0)
         {
 
-            printf("\n\nIndique a duracao das aulas de %s da UC em minutos", uniCurricular.aulasOnline[j].designacao );
-            uniCurricular.aulasOnline[j].duracao = lerInteiro("",0,200);
+            printf("\n\nIndique a duracao das aulas de %s da UC em minutos", tipoAulas[j].designacao );
+            tipoAulas[j].duracao = lerInteiro("",1,200);
         }
 
     }
+
+}
+
+tipoUnidadeCurricular lerDadosUC()
+{
+
+    tipoUnidadeCurricular uniCurricular;
+
+
+    lerString("\n\nInsira a designacao da UC: ", uniCurricular.designacao, MAX_STRING);
+    uniCurricular.tipoUC = lerInteiro("\n\nIndique o tipo de UC\n\n0 - Opcional\n\n1 - Obrigatoria\n\n ",0,1);
+    uniCurricular.semestre = lerInteiro("\n\nIndique o semestre a que esta UC pertence ",1,6);
+    uniCurricular.regime = lerInteiro("\n\nIndique o requime da UC\n\n0 - diurno\n\n1 - pos-laboral\n\n ",0,1);
+    lerUCTipoAulas(uniCurricular.aulasOnline);
+
 
     return uniCurricular;
 }
