@@ -4,6 +4,42 @@
 
 #include "../headers/funcoes_ficheiros.h"
 
+void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
+{
+
+    FILE *ficheiro;
+
+    int erro,numLido;
+
+    *numAulas=0;
+
+    ficheiro = fopen("ficheiros/AulasOnline.dat", "rb");
+
+    if(ficheiro == NULL)
+    {
+        printf("\n\nOcorreu um erro ao ler o ficheiro das aulas online");
+    }
+    else
+    {
+        //Le o número de UCs existentes até ao momento no ficheiro
+        fread(numAulas, sizeof(int), 1, ficheiro);
+        //Le todas as UCs existentes até ao momento no ficheiro
+        numLido=fread(aulasOnline, sizeof(tipoAulaOnline), *numAulas, ficheiro);
+        printf("\n\t\t\tElementos lidos: %d\n", numLido);
+
+
+        erro = fclose(ficheiro);
+
+        if(erro != 0)
+        {
+
+            printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+        }
+    }
+
+
+
+}
 
 
 void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAulas)
@@ -18,7 +54,7 @@ void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAula
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao abrir o ficheiro das aulas online");
+        printf("\n\nOcorreu um erro ao escrever no ficheiro das aulas online");
     }
     else
     {
@@ -54,7 +90,7 @@ void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs){
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao abrir o ficheiro das unidades curriculares");
+        printf("\n\nOcorreu um erro ao ler o ficheiro das unidades curriculares");
     }
     else
     {
@@ -90,7 +126,7 @@ void escreverFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int numUC
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao abrir o ficheiro das unidades curriculares");
+        printf("\n\nOcorreu um erro ao escrever no ficheiro das unidades curriculares");
     }
     else
     {

@@ -3,6 +3,7 @@
 
 #include "constantes.h"
 
+int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular,int tipoAula);
 tipoData lerData();
 tipoAulaOnline lerDadosAulaOnline();
 int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas);

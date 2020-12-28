@@ -207,7 +207,7 @@ void lerUCTipoAulas(tipoAulas tipoAulas[])
         {
 
             printf("\n\nIndique a duracao das aulas de %s da UC em minutos", tipoAulas[j].designacao );
-            tipoAulas[j].duracao = lerInteiro("",1,200);
+            tipoAulas[j].duracao = lerInteiro("",1,MAX_DURACAO_AULA_DIURNO);
         }
 
     }
