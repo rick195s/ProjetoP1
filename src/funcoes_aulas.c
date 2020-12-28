@@ -12,7 +12,7 @@ int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula)
 {
 
     /*
-    Esta funÁ„o tem a responsabilidade de verificar quantas aulas do tipo "tipoAula"
+    Esta fun√ß√£o tem a responsabilidade de verificar quantas aulas do tipo "tipoAula"
     existem na unidade curriular a que a aula vai ser associada
     */
 
@@ -61,7 +61,7 @@ tipoAulaOnline lerDadosAulaOnline()
 
 
     /*
-    Se a uc n„o existir o utilizador volta ao menu das aulas
+    Se a uc n√£o existir o utilizador volta ao menu das aulas
     */
 
     if(codigoUC != -1)
@@ -69,8 +69,8 @@ tipoAulaOnline lerDadosAulaOnline()
         aulaOnline.codigoUC = codigoUC;
 
         /*
-        Antes de associarmos o tipo de aula ‡ aula primeiro temos de verificar
-        se a UC a que esta aula vai pertener tem "espaÁo", ou seja numero de aulas
+        Antes de associarmos o tipo de aula √† aula primeiro temos de verificar
+        se a UC a que esta aula vai pertener tem "espa√ßo", ou seja numero de aulas
         deste tipo na uc > 0, para mais uma aula deste tipo
         */
 
@@ -78,6 +78,7 @@ tipoAulaOnline lerDadosAulaOnline()
         {
 
             aulaOnline.tipoAula = lerInteiro("\n\nTipo de aula\n\n0 - T\n\n1 - TP\n\n2 - PL  ",0,2);
+            quantidadeAulas = quantidadeAulasTipo(uniCurricular,aulaOnline.tipoAula);
 
 
             if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
@@ -85,24 +86,20 @@ tipoAulaOnline lerDadosAulaOnline()
                 printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
 
             }
-            else
+            else if((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade - quantidadeAulas) == 0)
             {
-                quantidadeAulas = quantidadeAulasTipo(uniCurricular,aulaOnline.tipoAula);
+                printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
 
-                if((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade - quantidadeAulas) == 0)
-                {
-                    printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
-
-                }
             }
-
         }
+
+
         while((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade - quantidadeAulas) == 0);
 
 
         /*
-        A hora de inicio de uma aula pode ser desde a hora minima de comeÁo at· ‡ hora final
-        menos o tempo de duraÁ„o do tipo de uma aula da UC
+        A hora de inicio de uma aula pode ser desde a hora minima de come√ßo at√° √† hora final
+        menos o tempo de dura√ß√£o do tipo de uma aula da UC
         */
 
         if(uniCurricular.regime == 0)
