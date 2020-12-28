@@ -12,6 +12,7 @@ int main()
     tipoAulaOnline aulasOnline[MAX_AULAS] = {0};
     int numUCs = 0, numAulas = 0;
     lerFiheiroBinarioUC(uniCurriculares, &numUCs);
+    lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas);
     char op;
 
 

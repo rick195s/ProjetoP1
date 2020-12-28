@@ -9,6 +9,8 @@
 #define MAX_STRING_FRASE 100
 #define MAX_AULAS 2048
 #define MAX_AULAS_POR_TIPO 150
+#define MAX_DURACAO_AULA_DIURNO 600
+#define MAX_DURACAO_AULA_POS_LABORAL 240
 //#define MAX_MENUS 5
 
 /*
@@ -53,8 +55,8 @@ typedef struct
     int tipoAula;
     char nomeDocente[MAX_STRING];
     tipoData data;
-    int horaInicio;
-    int horaFim;
+    float horaInicio;
+    float horaFim;
     int estado;
     int gravada;
 
