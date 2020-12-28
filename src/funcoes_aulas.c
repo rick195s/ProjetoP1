@@ -86,7 +86,7 @@ tipoAulaOnline lerDadosAulaOnline()
                 printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
 
             }
-            else if((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade - quantidadeAulas) == 0)
+            else if(quantidadeAulas == 0)
             {
                 printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
 
@@ -94,7 +94,7 @@ tipoAulaOnline lerDadosAulaOnline()
         }
 
 
-        while((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade - quantidadeAulas) == 0);
+        while(quantidadeAulas == 0);
 
 
         /*
