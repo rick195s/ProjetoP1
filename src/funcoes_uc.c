@@ -1,23 +1,11 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 
 #include "../headers/funcoes_uc.h"
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
-
-/*
-void obterUC(tipoUnidadeCurricular *uniCurricular, int posicao)
-{
-
-    tipoUnidadeCurricular uniCurriculares[MAX_UC];
-
-    lerFiheiroBinarioUC(uniCurriculares);
-    *uniCurricular=uniCurriculares[posicao];
-
-}*/
 
 void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
 {
@@ -77,24 +65,17 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
 
 }
 
-int procurarUC(tipoUnidadeCurricular *uniCurricular, int codigoUC, int devolverUC)
+int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
     /*
     Esta função devolve a posição onde se encontra a unidade curricular com o codigo recebido
-    pelo argumento "codigoUC" ou -1 caso não encontre. Se o argumento "devolverUC" estiver a 1 o
-    argumento "uniCurricular" irá ser alterado e passar a conter a unidade curricular
-    encontrada, senão o argumento uniCurricular irá conter lixo. Decedi  implementar esta
-    funcionalidade pois quando é criada uma aula online é preciso saber o tipo de aulas da
-    uc e o seu regime logo se fosse criar outra funcao que devolvesse estes dados iria estar
-    a aceder duas vezes a fiheiros "memoria" na função "agendarAulaOnline", usava a funcao
-    "procurarUC" e "obrterUC", tornando assim a execução mais lenta.
+    pelo argumento "codigoUC" ou -1 caso não encontre
     */
 
-    tipoUnidadeCurricular uniCurriculares[MAX_UC];
-    int i,posicao=-1,numUCs;
 
-    lerFiheiroBinarioUC(uniCurriculares,&numUCs);
+    int i,posicao=-1;
+
 
     for(i=0; i<numUCs; i++)
     {
@@ -102,10 +83,7 @@ int procurarUC(tipoUnidadeCurricular *uniCurricular, int codigoUC, int devolverU
         if(uniCurriculares[i].codigo == codigoUC)
         {
             posicao = i;
-            if(devolverUC == 1)
-            {
-                *uniCurricular = uniCurriculares[i];
-            }
+
 
         }
 
@@ -128,7 +106,7 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     pretendida essa alteração é enviada uma variavél qualquer do tipoUnidadeCurricular
     para a função, sendo que ela não vai ser alterada.
     */
-    posicao=procurarUC(&uniCurriculares[0],codigo,0);
+    posicao=procurarUC(codigo, uniCurriculares, numUCs);
     if(posicao != -1)
     {
         //Mostra a unidade curricular que foi encontrada
@@ -155,6 +133,7 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
+    srand(time(NULL));
     int codigo, unico,i;
 
     /*Caso exista uma UC com o codigo igual ao gerado o programa irá
@@ -239,6 +218,7 @@ int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     up_numUCs = numUCs;
 
     system("@cls||clear");
+
 
     quantidadeUCs=lerInteiro("\n\nIndique quantas unidades curiulares pretende inserir", 1, MAX_UC-numUCs);
 

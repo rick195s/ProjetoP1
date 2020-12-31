@@ -8,7 +8,7 @@ void lerUCTipoAulas(tipoAulas tipoAulas[]);
 tipoUnidadeCurricular lerDadosUC();
 int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs);
 void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs);
-int procurarUC(tipoUnidadeCurricular *uniCurricular, int codigoUC, int devolverUC);
+int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs);
 void listarUC(tipoUnidadeCurricular uniCurricular, int detalhes);
 void obterUC(tipoUnidadeCurricular *uniCurricular, int posicao);
 

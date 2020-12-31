@@ -3,10 +3,11 @@
 
 #include "constantes.h"
 
-int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular,int tipoAula);
+void listarAulasOnline(tipoAulaOnline aulaOnline);
+int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas);
 tipoData lerData();
-tipoAulaOnline lerDadosAulaOnline();
-int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas);
+tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas);
+int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs);
 
 
 #endif // FUNCOES_AULAS_H_INCLUDED

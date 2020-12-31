@@ -4,6 +4,26 @@
 
 #include "../headers/funcoes_auxiliares.h"
 
+
+float formatarHoraComDuracaoAula(int duracao, float hora, int sinal)
+{
+    float horaCompleta, minutos;
+
+    if(sinal == 0){
+        hora=((hora* 60) + (float) duracao)/60;
+
+
+    }else{
+        hora=((hora* 60) - (float) duracao)/60;
+
+    }
+    minutos = (hora - (int) hora) *0.6;
+    horaCompleta = (int) hora+minutos;
+
+    return horaCompleta;
+}
+
+
 // Acrescentada variavel controlo para repetir insercao se ao for inserido numero int
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo)
 {

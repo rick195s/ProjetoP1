@@ -93,27 +93,27 @@
 	<stdlib.h>	
 	"../headers/constantes.h"	
 
-1608557496 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_auxiliares.c
+1609344838 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_auxiliares.c
 	<stdio.h>
 	<string.h>
 	"../headers/funcoes_auxiliares.h"
 
-1608557496 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_auxiliares.h
+1609275363 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_auxiliares.h
 	"../headers/constantes.h"
 
-1609100086 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
+1609345316 c:\users\ricar\desktop\ipl\p1\projetop1\headers\constantes.h
 
-1609166567 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
+1609412874 source:c:\users\ricar\desktop\ipl\p1\projetop1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"headers/funcoes_menus.h"
 	"headers/constantes.h"
 	"headers/funcoes_ficheiros.h"
 
-1608989813 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
+1609342095 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_menus.h
 	"constantes.h"
 
-1609093854 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
+1609342801 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_menus.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -123,29 +123,31 @@
 	"../headers/funcoes_auxiliares.h"
 	"../headers/funcoes_ficheiros.h"
 
-1609092804 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_uc.h
+1609342429 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_uc.h
 	"constantes.h"
 
-1609165429 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_ficheiros.c
+1609414837 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_ficheiros.c
 	<stdio.h>
 	<string.h>
+	<stdlib.h>
 	"../headers/funcoes_ficheiros.h"
 
 1609163413 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_ficheiros.h
 	"constantes.h"
 
-1609099357 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_uc.c
+1609414575 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_uc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<time.h>
 	"../headers/funcoes_uc.h"
 	"../headers/funcoes_ficheiros.h"
 	"../headers/funcoes_auxiliares.h"
 
-1609164160 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_aulas.h
+1609347298 c:\users\ricar\desktop\ipl\p1\projetop1\headers\funcoes_aulas.h
 	"constantes.h"
 
-1609166492 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_aulas.c
+1609415295 source:c:\users\ricar\desktop\ipl\p1\projetop1\src\funcoes_aulas.c
 	<stdio.h>
 	<stdlib.h>
 	"../headers/funcoes_aulas.h"

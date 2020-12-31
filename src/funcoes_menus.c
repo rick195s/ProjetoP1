@@ -30,14 +30,15 @@ char menuPrincipal()
 
 }
 
-void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas)
+void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas , tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
     char op;
-
+    int i;
 
     do
     {
+        lerFiheiroBinarioAulasOnline(aulasOnline, numAulas);
 
 
         printf("\n************************ Menu das Aulas Online ************************");
@@ -57,7 +58,8 @@ void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas)
         switch(op)
         {
         case 'A':
-            *numAulas=agendarAulaOnline(aulasOnline, *numAulas);
+            system("@cls||clear");
+            *numAulas=agendarAulaOnline(aulasOnline, *numAulas, uniCurriculares, numUCs);
             break;
         case 'I':
 
@@ -67,7 +69,20 @@ void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas)
             break;
 
         case 'L':
+            if(*numAulas == 0)
+            {
+                system("@cls||clear");
+                printf("\n\nNao existem aulas para apresentar");
+            }
+            else
+            {
+                for(i=0; i<*numAulas; i++)
+                {
 
+                    listarAulasOnline(aulasOnline[i]);
+
+                }
+            }
             break;
         case 'F':
             break;
