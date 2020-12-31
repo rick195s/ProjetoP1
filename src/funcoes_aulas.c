@@ -8,18 +8,29 @@
 #include "../headers/funcoes_auxiliares.h"
 
 
-int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula)
+
+void listarAulasOnline(tipoAulaOnline aulaOnline)
 {
+
+    printf("\n\ncodigo: %d", aulaOnline.codigoUC);
+    printf("\n\ndesignacao: %s", aulaOnline.designacao);
+    printf("\n\ndoente: %s", aulaOnline.nomeDocente);
+    printf("\n\ninicio: %.2f", aulaOnline.horaInicio);
+    printf("\n\nfim: %.2f", aulaOnline.horaFim);
+}
+
+int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas)
+{
+
 
     /*
     Esta função tem a responsabilidade de verificar quantas aulas do tipo "tipoAula"
     existem na unidade curriular a que a aula vai ser associada
     */
 
-    int i,quantidade=0, numAulas;
-    tipoAulaOnline aulasOnline[MAX_AULAS];
 
-    lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas);
+    int i,quantidade=0;
+
 
     for(i=0; i<numAulas; i++)
     {
@@ -32,6 +43,8 @@ int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula)
 
     }
 
+
+
     return quantidade;
 }
 
@@ -41,122 +54,122 @@ tipoData lerData()
     tipoData data;
 
     printf("\n\nIntroduza a data da aula:");
-    data.dia = lerInteiro("\n\tDia ", 1,31);
-    data.mes = lerInteiro("\n\tMes ", 1,12);
-    data.ano = lerInteiro("\n\tDia ", 2020,2021);
+    data.dia = lerInteiro("\n\tDia", 1,31);
+    data.mes = lerInteiro("\n\tMes", 1,12);
+    data.ano = lerInteiro("\n\tAno", 2020,2021);
 
     return data;
 }
 
-tipoAulaOnline lerDadosAulaOnline()
+tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas)
 {
 
     tipoAulaOnline aulaOnline;
-    tipoUnidadeCurricular uniCurricular;
-    int codigoUC,quantidadeAulas;
-    float minutos,hora, horaCompleta;
-
-    codigoUC = lerInteiro("\n\nIntroduza o codigo da unidade curricular a que esta aula pertence ",1000,9999);
-    codigoUC = procurarUC(&uniCurricular,codigoUC,1);
+    int quantidadeAulas;
 
 
     /*
     Se a uc não existir o utilizador volta ao menu das aulas
     */
 
-    if(codigoUC != -1)
+
+    aulaOnline.codigoUC = uniCurricular.codigo;
+
+    /*
+    Antes de associarmos o tipo de aula à aula primeiro temos de verificar
+    se a UC a que esta aula vai pertener tem "espaço", ou seja numero de aulas
+    deste tipo na uc > 0, para mais uma aula deste tipo
+    */
+
+    do
     {
-        aulaOnline.codigoUC = codigoUC;
+
+        aulaOnline.tipoAula = lerInteiro("\n\nTipo de aula\n\n0 - T\n\n1 - TP\n\n2 - PL  ",0,2);
+        quantidadeAulas = quantidadeAulasTipo(uniCurricular,aulaOnline.tipoAula, aulasOnline, numAulas);
+
+
+        if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
+        {
+            printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
+
+        }
+        else if((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade-quantidadeAulas) == 0)
+        {
+            printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
+
+        }
+    }
+
+
+    while((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade-quantidadeAulas) == 0);
+
+
+    /*
+    A hora de inicio de uma aula pode ser desde a hora minima de começo atá à hora final
+    menos o tempo de duração do tipo de uma aula da UC
+    */
+
+    if(uniCurricular.regime == 0)
+    {
 
         /*
-        Antes de associarmos o tipo de aula à aula primeiro temos de verificar
-        se a UC a que esta aula vai pertener tem "espaço", ou seja numero de aulas
-        deste tipo na uc > 0, para mais uma aula deste tipo
+        Para conseguir converter as horas ccom formato correto implementamos uma função que
+        recebe por parametros a duracao do tipo de aula em minutos, a hora a que essa alteração
+        vai ser efetuada e o sinal, ou seja 0 para positivo e 1 para negativo, pois assim
+        a mesma função consegue converter a hora de inicio ou a hora de fim
         */
 
-        do
-        {
+        aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",8,formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,18,1));
 
-            aulaOnline.tipoAula = lerInteiro("\n\nTipo de aula\n\n0 - T\n\n1 - TP\n\n2 - PL  ",0,2);
-            quantidadeAulas = quantidadeAulasTipo(uniCurricular,aulaOnline.tipoAula);
+        aulaOnline.horaFim = formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,aulaOnline.horaInicio,0);
 
-
-            if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
-            {
-                printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
-
-            }
-            else if(quantidadeAulas == 0)
-            {
-                printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
-
-            }
-        }
-
-
-        while(quantidadeAulas == 0);
-
-
-        /*
-        A hora de inicio de uma aula pode ser desde a hora minima de começo atá à hora final
-        menos o tempo de duração do tipo de uma aula da UC
-        */
-
-        if(uniCurricular.regime == 0)
-        {
-
-            hora=((18*60)- (float) uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao)/60;
-            minutos = (hora - (int) hora)*0.6;
-            horaCompleta = (int) hora+minutos;
-
-            aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",8,horaCompleta);
-            aulaOnline.horaFim = lerFloat("\n\tFim ",aulaOnline.horaInicio,18);
-
-        }
-        else
-        {
-            hora=((24*60)-uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao)/60;
-
-            minutos = (hora - (int) hora)*0.6;
-            horaCompleta = (int) hora+minutos;
-
-            aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",18,horaCompleta);
-            aulaOnline.horaFim = lerFloat("\n\tFim ",aulaOnline.horaInicio,24);
-        }
-
-
-        lerString("\n\nNome do Docente: ", aulaOnline.nomeDocente, MAX_STRING);
-        aulaOnline.data = lerData();
-
-        aulaOnline.estado = 0;
-        aulaOnline.gravada = 0;
-
-        return aulaOnline;
 
     }
     else
     {
 
-        aulaOnline.codigoUC = codigoUC;
-        return aulaOnline;
+
+        aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",18,formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,24,1));
+
+        aulaOnline.horaFim = formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,aulaOnline.horaInicio,0);
 
     }
+
+
+    lerString("\n\nNome do Docente: ", aulaOnline.nomeDocente, MAX_STRING);
+
+    /*
+    Verificar se a desginação da é única
+    */
+    lerString("\n\nDesignacao da aula: ", aulaOnline.designacao, MAX_STRING);
+    aulaOnline.data = lerData();
+
+    aulaOnline.estado = 0;
+    aulaOnline.gravada = 0;
+
+    return aulaOnline;
+
+
+
 
 }
 
 
-int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
+int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
-    int up_numAulas;
+    int up_numAulas, codigoUC, posicao;
 
     up_numAulas = numAulas;
 
     system("@cls||clear");
 
-    aulasOnline[up_numAulas] = lerDadosAulaOnline();
 
-    if(aulasOnline[up_numAulas].codigoUC == -1 )
+    codigoUC = lerInteiro("\n\nIntroduza o codigo da unidade curricular a que esta aula pertence ",1000,9999);
+    posicao = procurarUC(codigoUC, uniCurriculares, numUCs);
+
+
+    if(posicao == -1 )
     {
 
         printf("\n\nA unidade curricular que introduziu nao existe");
@@ -166,8 +179,22 @@ int agendarAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
     {
 
         up_numAulas++;
-        escreverFiheiroBinarioAulasOnline(aulasOnline, up_numAulas);
+        aulasOnline = realloc(aulasOnline, up_numAulas*sizeof(tipoAulaOnline));
+
+        if(aulasOnline == NULL)
+        {
+            printf("\n\nNao foi possivel agendar reservar memoria para as aulas online");
+        }
+        else
+        {
+            aulasOnline[numAulas] = lerDadosAulaOnline(uniCurriculares[posicao],aulasOnline, numAulas);
+
+            escreverFiheiroBinarioAulasOnline(aulasOnline, up_numAulas);
+        }
+
+
     }
+
 
     return up_numAulas;
 

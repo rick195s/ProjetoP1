@@ -7,21 +7,10 @@
 #define MAX_ESTUDANTES 100
 #define MAX_MENU_OPCOES 15
 #define MAX_STRING_FRASE 100
-#define MAX_AULAS 2048
-#define MAX_AULAS_POR_TIPO 150
 #define MAX_DURACAO_AULA_DIURNO 600
 #define MAX_DURACAO_AULA_POS_LABORAL 240
-//#define MAX_MENUS 5
-
-/*
-typedef struct{
-
-    char op[1];
-    char opFrase[MAX_STRING_FRASE];
-    char funcao[MAX_STRING];
-
-
-}tipoMenu;*/
+#define MAX_AULAS_POR_TIPO 150
+#define INITIAL_AULAS_ONLINE 10
 
 typedef struct{
 

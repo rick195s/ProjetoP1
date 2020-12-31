@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 
 #include "../headers/funcoes_ficheiros.h"
 
 void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
 {
+
 
     FILE *ficheiro;
 
@@ -13,7 +14,7 @@ void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
 
     *numAulas=0;
 
-    ficheiro = fopen("ficheiros/AulasOnline.dat", "rb");
+    ficheiro = fopen("ficheiros/AulasOnline.dat","rb");
 
     if(ficheiro == NULL)
     {
@@ -22,19 +23,33 @@ void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
     else
     {
         //Le o número de UCs existentes até ao momento no ficheiro
+
         fread(numAulas, sizeof(int), 1, ficheiro);
         //Le todas as UCs existentes até ao momento no ficheiro
-        numLido=fread(aulasOnline, sizeof(tipoAulaOnline), *numAulas, ficheiro);
-        printf("\n\t\t\tElementos lidos: %d\n", numLido);
-
-
-        erro = fclose(ficheiro);
-
-        if(erro != 0)
-        {
-
-            printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+        if(*numAulas == 0){
+             aulasOnline = realloc(aulasOnline, 1*sizeof(tipoAulaOnline));
+        }else{
+             aulasOnline = realloc(aulasOnline, (*numAulas)*sizeof(tipoAulaOnline));
         }
+
+        if(aulasOnline == NULL)
+        {
+            printf("\n\nNao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas");
+        }
+        else
+        {
+            numLido=fread(aulasOnline, sizeof(tipoAulaOnline), *numAulas, ficheiro);
+            printf("\n\t\t\tElementos lidos: %d\n", numLido);
+
+            erro = fclose(ficheiro);
+
+            if(erro != 0)
+            {
+
+                printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+            }
+        }
+
     }
 
 
@@ -59,6 +74,7 @@ void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAula
     else
     {
         //Escreve o número de aulas online existentes até ao momento no ficheiro
+
         fwrite(&numAulas, sizeof(int), 1, ficheiro);
 
         //Escreve todas as aulas online existentes até ao momento no ficheiro
@@ -78,7 +94,10 @@ void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAula
 }
 
 
-void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs){
+void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs)
+{
+
+
 
 
     FILE *ficheiro;
