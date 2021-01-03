@@ -9,7 +9,7 @@
 #include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_auxiliares.h"
 #include "../headers/funcoes_ficheiros.h"
-
+#include "../headers/constantes.h"
 
 char menuPrincipal()
 {
@@ -30,22 +30,22 @@ char menuPrincipal()
 
 }
 
-void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas , tipoUnidadeCurricular uniCurriculares[], int numUCs)
+tipoAulaOnline *menuAulas(tipoAulaOnline aulasOnline[],int *numAulas , tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
 
     char op;
     int i;
 
+
     do
     {
-        lerFiheiroBinarioAulasOnline(aulasOnline, numAulas);
-
 
         printf("\n************************ Menu das Aulas Online ************************");
 
 
 
-        printf("\n\nA - Agendar Aulas Online");
+        printf("\n\nA - Agendar Aula Online");
+        printf("\n\nC - Alterar Aula Online");
         printf("\n\nI - Iniciar Aula Online");
         printf("\n\nT - Terminar Aula Online");
         printf("\n\nL - Listar Aulas Online");
@@ -55,11 +55,17 @@ void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas , tipoUnidadeCurricul
         op=toupper(op);
         limpaBufferStdin();
 
+
         switch(op)
         {
         case 'A':
             system("@cls||clear");
-            *numAulas=agendarAulaOnline(aulasOnline, *numAulas, uniCurriculares, numUCs);
+
+            aulasOnline=agendarAulaOnline(aulasOnline, numAulas, uniCurriculares, numUCs);
+
+            break;
+        case 'C':
+
             break;
         case 'I':
 
@@ -72,7 +78,7 @@ void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas , tipoUnidadeCurricul
             if(*numAulas == 0)
             {
                 system("@cls||clear");
-                printf("\n\nNao existem aulas para apresentar");
+                printf("\n\n\tNao existem aulas para apresentar\n\n");
             }
             else
             {
@@ -93,7 +99,7 @@ void menuAulas(tipoAulaOnline aulasOnline[], int *numAulas , tipoUnidadeCurricul
     }
     while(op!='F');
 
-
+    return aulasOnline;
 
 }
 

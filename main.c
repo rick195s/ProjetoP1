@@ -9,9 +9,13 @@ int main()
 {
 
     tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
+    int numUCs = 0, numAulas = 0;
+    char op;
+    tipoAulaOnline *aulasOnline;
 
-    tipoAulaOnline *aulasOnline = NULL;
-    aulasOnline = calloc(INITIAL_AULAS_ONLINE,sizeof(tipoAulaOnline));
+    aulasOnline = NULL;
+    aulasOnline = realloc(aulasOnline,numAulas*sizeof(tipoAulaOnline));
+
 
     if(aulasOnline == NULL)
     {
@@ -22,16 +26,14 @@ int main()
     else
     {
 
-        int numUCs = 0, numAulas = 0;
 
-        char op;
-
-
+        lerFiheiroBinarioUC(uniCurriculares, &numUCs);
+        aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline,&numAulas);
         do
         {
             op=menuPrincipal();
-            lerFiheiroBinarioUC(uniCurriculares, &numUCs);
-            lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas);
+
+
             switch(op)
             {
             case 'U':
@@ -47,7 +49,7 @@ int main()
                 else
                 {
                     system("@cls||clear");
-                    menuAulas(aulasOnline, &numAulas, uniCurriculares, numUCs);
+                    aulasOnline=menuAulas(aulasOnline, &numAulas, uniCurriculares, numUCs);
                 }
 
 
