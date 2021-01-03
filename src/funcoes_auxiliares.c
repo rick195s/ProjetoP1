@@ -9,16 +9,25 @@ float formatarHoraComDuracaoAula(int duracao, float hora, int sinal)
 {
     float horaCompleta, minutos;
 
-    if(sinal == 0){
-        hora=((hora* 60) + (float) duracao)/60;
 
-
-    }else{
-        hora=((hora* 60) - (float) duracao)/60;
+    if(sinal == 0)
+    {
+        hora=((hora* 60) +  duracao)/60;
 
     }
-    minutos = (hora - (int) hora) *0.6;
-    horaCompleta = (int) hora+minutos;
+    else
+    {
+        hora=((hora* 60) - duracao)/60;
+
+    }
+
+    if(hora-(int)hora >= 0.6)
+    {
+        minutos = (hora-(int)hora) *0.6;
+
+    }
+      horaCompleta = (int) hora + minutos;
+
 
     return horaCompleta;
 }

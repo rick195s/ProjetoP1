@@ -2,42 +2,45 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_ficheiros.h"
 
-void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
+tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *numAulas)
 {
 
 
     FILE *ficheiro;
 
     int erro,numLido;
+    tipoAulaOnline *aux;
 
-    *numAulas=0;
+
+
 
     ficheiro = fopen("ficheiros/AulasOnline.dat","rb");
 
     if(ficheiro == NULL)
     {
         printf("\n\nOcorreu um erro ao ler o ficheiro das aulas online");
+
     }
     else
     {
         //Le o número de UCs existentes até ao momento no ficheiro
 
-        fread(numAulas, sizeof(int), 1, ficheiro);
-        //Le todas as UCs existentes até ao momento no ficheiro
-        if(*numAulas == 0){
-             aulasOnline = realloc(aulasOnline, 1*sizeof(tipoAulaOnline));
-        }else{
-             aulasOnline = realloc(aulasOnline, (*numAulas)*sizeof(tipoAulaOnline));
-        }
+        fread(&(*numAulas), sizeof(int), 1, ficheiro);
+        aux = aulasOnline;
+        aulasOnline = realloc(aulasOnline, (*numAulas)*sizeof(tipoAulaOnline));
 
-        if(aulasOnline == NULL)
+
+        if(aulasOnline == NULL && *numAulas != 0)
         {
             printf("\n\nNao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas");
+            aulasOnline = aux;
         }
         else
         {
+            //Le todas as UCs existentes até ao momento no ficheiro
             numLido=fread(aulasOnline, sizeof(tipoAulaOnline), *numAulas, ficheiro);
             printf("\n\t\t\tElementos lidos: %d\n", numLido);
 
@@ -53,7 +56,7 @@ void lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas)
     }
 
 
-
+    return aulasOnline;
 }
 
 
