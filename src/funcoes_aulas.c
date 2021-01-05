@@ -8,6 +8,7 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 
+
 int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnline aulaOnline)
 {
 
@@ -15,8 +16,12 @@ int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnl
 
     for(i=0; i<numAulas; i++)
     {
+        /*
 
-        if( aulaOnline.codigoUC == aulasOnline[i].codigoUC && aulaOnline.data.ano == aulasOnline[i].data.ano && aulaOnline.data.mes == aulasOnline[i].data.mes && aulaOnline.data.dia == aulasOnline[i].data.dia && aulaOnline.horaInicio >= aulasOnline[i].horaInicio && aulaOnline.horaInicio <= aulasOnline[i].horaFim)
+            FALTA VERIFICAR SE HA AULAS CCOMEÇAM ENQUANTO OUTROS ESTÃO A DECORRER
+
+        */
+        if( aulaOnline.codigoUC == aulasOnline[i].codigoUC && aulaOnline.data.ano == aulasOnline[i].data.ano && aulaOnline.data.mes == aulasOnline[i].data.mes && aulaOnline.data.dia == aulasOnline[i].data.dia && aulaOnline.horaInicio >= aulasOnline[i].horaInicio && aulaOnline.horaInicio <= aulasOnline[i].horaFim )
         {
 
             unica = 0;
@@ -30,7 +35,7 @@ int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnl
 
 }
 
-int designacaoAulaUnica(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING])
+int verificarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING])
 {
 
     int unica=1,i;
@@ -66,7 +71,7 @@ void listarAulasOnline(tipoAulaOnline aulaOnline)
 
 }
 
-int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo)
+int verificarQuantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo)
 {
 
 
@@ -113,6 +118,50 @@ int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoA
     return quantidade;
 }
 
+float formatarHoraComDuracaoAula(int duracao, float hora, int sinal)
+{
+    float horaCompleta, minutos,horas;
+
+    if(sinal == 0)
+    {
+        horas=(((int)hora* 60)+(hora-(int)hora)*100 + duracao)/60.0;
+
+    }
+    else
+    {
+        horas=(((int)hora* 60)+(hora-(int)hora)*100 - duracao)/60.0;
+    }
+
+    hora=horas;
+    horas=(int)horas;
+    minutos=(hora-horas)*0.6;
+    horaCompleta=horas+minutos;
+
+    return horaCompleta;
+}
+
+/*
+Le a hora e os minutos devolvendo depois um float com a hora nas unidades e os minutos na parte decimal
+*/
+float lerHoraAula(float inicio, float fim){
+
+    float horaCompleta;
+    int hora,minutos;
+
+    hora=lerInteiro("\n\nInsire o inicio da aula\n\nhora", inicio, fim);
+
+    if(hora<(int)fim){
+         minutos=lerInteiro("\n\nminutos", 0,59);
+    }else{
+
+         minutos=lerInteiro("\n\nminutos", 0,((fim-(int) fim)*100));
+    }
+
+    horaCompleta=hora+(minutos*0.01);
+
+    return horaCompleta;
+}
+
 tipoData lerData()
 {
 
@@ -134,6 +183,7 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     /*
     Se a uc não existir o utilizador volta ao menu das aulas
     */
+
     aulaOnline.codigoUC = uniCurricular.codigo;
     /*
     Antes de associarmos o tipo de aula à aula primeiro temos de verificar
@@ -144,9 +194,9 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     do
     {
         aulaOnline.tipoAula = lerInteiro("\n\nTipo de aula\n\n0 - T\n\n1 - TP\n\n2 - PL  ",0,2);
-        quantidadeAulas = quantidadeAulasTipo(uniCurricular, aulaOnline.tipoAula, aulasOnline, numAulas,0);
+        quantidadeAulas = verificarQuantidadeAulasTipo(uniCurricular, aulaOnline.tipoAula, aulasOnline, numAulas,0);
 
-        if(uniCurricular.aulasOnline[ aulaOnline.tipoAula].quantidade == 0)
+        if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
         {
             system("@cls||clear");
             printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
@@ -173,19 +223,15 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
             vai ser efetuada e o sinal, ou seja 0 para positivo e 1 para negativo, pois assim
             a mesma função consegue converter a hora de inicio ou a hora de fim
             */
-            aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",8,formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,18,1));
-
+            aulaOnline.horaInicio = lerHoraAula(8, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,18,1));
         }
         else
         {
-            aulaOnline.horaInicio = lerFloat("\n\nIntroduza o horario da aula:\n\tInicio ",18,formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,24,1));
+            aulaOnline.horaInicio = lerHoraAula(18, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,24,1));
         }
 
 
-        printf("\n\ninicioa %.2f", aulaOnline.horaInicio);
-
         aulaOnline.horaFim = formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,aulaOnline.horaInicio,0);
-        printf("\n\nfim %.2f", aulaOnline.horaFim);
 
         aulaOnline.data = lerData();
         horarioAula=verificarHorarioAula(aulasOnline, numAulas, aulaOnline);
@@ -205,7 +251,7 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     do
     {
         lerString("\n\nDesignacao da aula: ", aulaOnline.designacao, MAX_STRING);
-        designacao = designacaoAulaUnica(aulasOnline, numAulas, aulaOnline.designacao);
+        designacao = verificarDesignacaoAula(aulasOnline, numAulas, aulaOnline.designacao);
 
         if(designacao != 1)
         {
