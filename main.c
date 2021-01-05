@@ -4,13 +4,15 @@
 #include "headers/funcoes_menus.h"
 #include "headers/constantes.h"
 #include "headers/funcoes_ficheiros.h"
+#include "headers/funcoes_aulas.h"
+#include "headers/funcoes_uc.h"
 
 int main()
 {
 
     tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
-    int numUCs = 0, numAulas = 0;
-    char op;
+    int numUCs = 0, numAulas = 0,i;
+    char op,opSubMenus;
     tipoAulaOnline *aulasOnline;
 
     aulasOnline = NULL;
@@ -38,7 +40,65 @@ int main()
             {
             case 'U':
                 system("@cls||clear");
-                menuUC(uniCurriculares, &numUCs);
+                do
+                {
+                    opSubMenus=menuUC();
+                    switch(opSubMenus)
+                    {
+
+                    case 'I':
+
+                        if(numUCs<MAX_UC)
+                        {
+                            numUCs=inserirUCs( uniCurriculares, numUCs);
+                        }
+                        else
+                        {
+                            system("@cls||clear");
+                            printf("\n\n\n\t\tO numero maximo de UCs foi alcancado\n\n\n");
+                        }
+
+                        break;
+                    case 'A':
+                        if(numUCs == 0)
+                        {
+                            system("@cls||clear");
+                            printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
+
+                        }
+                        else
+                        {
+                            system("@cls||clear");
+                            alterarUC(uniCurriculares, numUCs);
+                        }
+                        break;
+                    case 'L':
+                        if(numUCs == 0)
+                        {
+                            system("@cls||clear");
+                            printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
+
+                        }
+                        else
+                        {
+                            system("@cls||clear");
+                            for(i=0; i<numUCs; i++)
+                            {
+                                listarUC(uniCurriculares[i],1);
+                            }
+
+
+                        }
+                        break;
+                    case 'F':
+                        break;
+                    default:
+                        system("@cls||clear");
+                        printf("\n\n\n\t\tOpcao invalida\n\n\n");
+                    }
+                }
+                while(opSubMenus!='F');
+
                 break;
             case 'A':
                 if(numUCs == 0)
@@ -49,7 +109,54 @@ int main()
                 else
                 {
                     system("@cls||clear");
-                    aulasOnline=menuAulas(aulasOnline, &numAulas, uniCurriculares, numUCs);
+
+                    do
+                    {
+                        opSubMenus = menuAulas();
+                        switch(opSubMenus)
+                        {
+                        case 'A':
+                            system("@cls||clear");
+
+                            aulasOnline=agendarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
+
+                            break;
+                        case 'C':
+
+                            break;
+                        case 'I':
+
+                            break;
+                        case 'T':
+
+                            break;
+
+                        case 'L':
+                            if(numAulas == 0)
+                            {
+                                system("@cls||clear");
+                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                            }
+                            else
+                            {
+                                for(i=0; i<numAulas; i++)
+                                {
+
+                                    listarAulasOnline(aulasOnline[i]);
+
+                                }
+                            }
+                            break;
+                        case 'F':
+                            break;
+                        default:
+                            system("@cls||clear");
+                            printf("\n\n\n\t\tOpcao invalida\n\n\n");
+                        }
+                    }
+                    while(opSubMenus!='F');
+
+
                 }
 
 

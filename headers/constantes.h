@@ -19,6 +19,13 @@ typedef struct{
 
 }tipoAcessoGravacoes;
 
+typedef struct{
+
+    int hora;
+    int minutos;
+
+}tipoHora;
+
 typedef struct
 {
 
