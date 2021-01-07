@@ -93,6 +93,43 @@ void lerString(char mensagem[MAX_STRING], char vetorCaracteres[MAX_STRING], int 
 
 }
 
+tipoData lerData(void)
+{
+    tipoData data;
+    int maxDiasMes;
+
+    data.ano = lerInteiro(" ano", 2020, 2021);
+    data.mes = lerInteiro(" mes", 1, 12);
+
+    switch (data.mes)
+    {
+    case 2:
+        if ((data.ano % 400 == 0) || (data.ano % 4 == 0 && data.ano % 100 != 0))
+        {
+            maxDiasMes = 29;
+        }
+        else
+        {
+            maxDiasMes = 28;
+        }
+        break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        maxDiasMes = 30;
+        break;
+    default:
+        maxDiasMes = 31;
+    }
+
+    data.dia = lerInteiro(" dia:", 1, maxDiasMes);
+
+
+    return data;
+}
+
+
 void limpaBufferStdin(void)
 {
     char chr;
