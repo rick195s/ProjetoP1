@@ -8,7 +8,6 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 
-
 int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnline aulaOnline)
 {
 
@@ -140,11 +139,12 @@ float formatarHoraComDuracaoAula(int duracao, float hora, int sinal)
     return horaCompleta;
 }
 
-/*
-Le a hora e os minutos devolvendo depois um float com a hora nas unidades e os minutos na parte decimal
-*/
+
 float lerHoraAula(float inicio, float fim){
 
+    /*
+    Le a hora e os minutos devolvendo depois um float com a hora nas unidades e os minutos na parte decimal
+    */
     float horaCompleta;
     int hora,minutos;
 
@@ -160,19 +160,6 @@ float lerHoraAula(float inicio, float fim){
     horaCompleta=hora+(minutos*0.01);
 
     return horaCompleta;
-}
-
-tipoData lerData()
-{
-
-    tipoData data;
-
-    printf("\n\nIntroduza a data da aula:");
-    data.dia = lerInteiro("\n\tDia", 1,31);
-    data.mes = lerInteiro("\n\tMes", 1,12);
-    data.ano = lerInteiro("\n\tAno", 2020,2021);
-
-    return data;
 }
 
 tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas)

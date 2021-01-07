@@ -8,7 +8,6 @@ int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnl
 int verificarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING]);
 void listarAulasOnline(tipoAulaOnline aulaOnline);
 int verificarQuantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo);
-tipoData lerData();
 tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas);
 tipoAulaOnline *agendarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs);
 
