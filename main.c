@@ -27,8 +27,6 @@ int main()
     }
     else
     {
-
-
         lerFiheiroBinarioUC(uniCurriculares, &numUCs);
         aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline,&numAulas);
         do
@@ -121,7 +119,9 @@ int main()
                             aulasOnline=agendarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
 
                             break;
-                        case 'C':
+                        case 'E':
+                            system("@cls||clear");
+                            aulasOnline=editarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
 
                             break;
                         case 'I':
@@ -173,7 +173,8 @@ int main()
             }
         }
         while(op!='F');
-
+        escreverFiheiroBinarioUC(uniCurriculares, numUCs);
+        escreverFiheiroBinarioAulasOnline(aulasOnline, numAulas);
         free(aulasOnline);
     }
 

@@ -8,6 +8,128 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 
+tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipoUnidadeCurricular uniCurriculares[],int numUCs)
+{
+
+    tipoAulaOnline *aux;
+    int opcao,posicaoAula,posicaoUC,i;
+    char designacaoAula[MAX_STRING];
+
+    aux=aulasOnline;
+
+    lerString("\n\nIndique a designacao da aula que pretende alterar: ", designacaoAula, MAX_STRING);
+    posicaoAula=procurarDesignacaoAula(aulasOnline,*numAulas,designacaoAula);
+
+    if(posicaoAula == -1)
+    {
+        printf("\n\nNao existem aulas com a desginacao igual a que introduziu");
+    }
+    else
+    {
+        opcao=lerInteiro("\n\nOpcoes:\n\t0 - Alterar Agendamento\n\t1 - Eliminar Aula",0,1);
+
+        if(opcao == 0)
+        {
+            posicaoUC=procurarUC(aulasOnline[posicaoAula].codigoUC, uniCurriculares, numUCs);
+            if(posicaoUC == -1){
+                printf("\n\nOcorreu um erro ao procurar a unidade curricular correspondente a aula que pretende alterar");
+            }else{
+                lerHorarioCompletoAula(uniCurriculares[posicaoUC], &aulasOnline[posicaoAula], aulasOnline, *numAulas);
+            }
+        }
+        else
+        {
+            for(i=posicaoAula; i<(*numAulas)-1; i++)
+            {
+                aulasOnline[i]=aulasOnline[i+1];
+            }
+
+            aulasOnline=realloc(aulasOnline,((*numAulas)-1)*sizeof(tipoAulaOnline));
+
+            if(aulasOnline == NULL)
+            {
+                printf("\n\nOcorreu um erro a reservar mais memoria ao eliminar aula online");
+                aulasOnline=aux;
+
+            }
+            else
+            {
+                (*numAulas)--;
+            }
+
+        }
+    }
+
+    return aulasOnline;
+}
+
+void listarAulasOnline(tipoAulaOnline aulaOnline)
+{
+
+    printf("\n\ncodigo: %d", aulaOnline.codigoUC);
+    printf("\n\ndesignacao: %s", aulaOnline.designacao);
+    printf("\n\ndocente: %s", aulaOnline.nomeDocente);
+    printf("\n\ninicio: %.2f", aulaOnline.horaInicio);
+    printf("\n\nfim: %.2f", aulaOnline.horaFim);
+    printf("\n\ndia: %d", aulaOnline.data.dia);
+    printf("\n\nmes: %d", aulaOnline.data.mes);
+    printf("\n\nano: %d", aulaOnline.data.ano);
+
+
+}
+
+void lerHorarioCompletoAula(tipoUnidadeCurricular uniCurricular, tipoAulaOnline *aulaOnline, tipoAulaOnline aulasOnline[], int numAulas){
+
+    int horarioAula;
+    /*
+    Esta variavel tipoAulaOnline auxiliar serve para verificar primeiro o horario da aula e so
+    depois alterar os dados do ponteiro da aulaOnline na memoria, porque se altera-se logo
+    os dados quando são pedidos ao executar a função verificarHorarioAula iria estar sempre
+    a receber um valor da função como se já existisse uma aula com aquele horario
+    */
+    tipoAulaOnline aulaOnlineAux;
+
+    aulaOnlineAux = *aulaOnline;
+
+    do
+    {
+        if(uniCurricular.regime == 0)
+        {
+            /*
+            Para conseguir converter as horas ccom formato correto implementamos uma função que
+            recebe por parametros a duracao do tipo de aula em minutos, a hora a que essa alteração
+            vai ser efetuada e o sinal, ou seja 0 para positivo e 1 para negativo, pois assim
+            a mesma função consegue converter a hora de inicio ou a hora de fim
+            */
+            aulaOnlineAux.horaInicio = lerHoraAula(8, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnlineAux.tipoAula].duracao,18,1));
+        }
+        else
+        {
+            aulaOnlineAux.horaInicio = lerHoraAula(18, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnlineAux.tipoAula].duracao,24,1));
+        }
+
+
+        aulaOnlineAux.horaFim = formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnlineAux.tipoAula].duracao,aulaOnlineAux.horaInicio,0);
+
+        aulaOnlineAux.data = lerData();
+        horarioAula=verificarHorarioAula(aulasOnline, numAulas, aulaOnlineAux);
+
+        if(horarioAula != 1)
+        {
+            printf("\n\nJa existe uma aula da mesma UC marcada para esta data");
+        }else{
+
+            aulaOnline->horaInicio=aulaOnlineAux.horaInicio;
+            aulaOnline->horaFim=aulaOnlineAux.horaFim;
+            aulaOnline->data=aulaOnlineAux.data;
+
+        }
+
+    }
+    while(horarioAula != 1);
+
+}
+
 int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnline aulaOnline)
 {
 
@@ -34,40 +156,25 @@ int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnl
 
 }
 
-int verificarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING])
+int procurarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING])
 {
 
-    int unica=1,i;
+    int pos=-1,i;
 
     for(i=0; i<numAulas; i++)
     {
 
         if(strcmp(aulasOnline[i].designacao, designacao) == 0)
         {
-            unica = 0;
+            pos = i;
 
-            return unica;
+            return pos;
         }
 
     }
 
 
-    return unica;
-}
-
-void listarAulasOnline(tipoAulaOnline aulaOnline)
-{
-
-    printf("\n\ncodigo: %d", aulaOnline.codigoUC);
-    printf("\n\ndesignacao: %s", aulaOnline.designacao);
-    printf("\n\ndocente: %s", aulaOnline.nomeDocente);
-    printf("\n\ninicio: %.2f", aulaOnline.horaInicio);
-    printf("\n\nfim: %.2f", aulaOnline.horaFim);
-    printf("\n\ndia: %d", aulaOnline.data.dia);
-    printf("\n\nmes: %d", aulaOnline.data.mes);
-    printf("\n\nano: %d", aulaOnline.data.ano);
-
-
+    return pos;
 }
 
 int verificarQuantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo)
@@ -139,8 +246,8 @@ float formatarHoraComDuracaoAula(int duracao, float hora, int sinal)
     return horaCompleta;
 }
 
-
-float lerHoraAula(float inicio, float fim){
+float lerHoraAula(float inicio, float fim)
+{
 
     /*
     Le a hora e os minutos devolvendo depois um float com a hora nas unidades e os minutos na parte decimal
@@ -150,11 +257,14 @@ float lerHoraAula(float inicio, float fim){
 
     hora=lerInteiro("\n\nInsire o inicio da aula\n\nhora", inicio, fim);
 
-    if(hora<(int)fim){
-         minutos=lerInteiro("\n\nminutos", 0,59);
-    }else{
+    if(hora<(int)fim)
+    {
+        minutos=lerInteiro("\n\nminutos", 0,59);
+    }
+    else
+    {
 
-         minutos=lerInteiro("\n\nminutos", 0,((fim-(int) fim)*100));
+        minutos=lerInteiro("\n\nminutos", 0,((fim-(int) fim)*100));
     }
 
     horaCompleta=hora+(minutos*0.01);
@@ -166,7 +276,7 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
 {
 
     tipoAulaOnline aulaOnline;
-    int designacao,quantidadeAulas, horarioAula;
+    int designacao,quantidadeAulas;
     /*
     Se a uc não existir o utilizador volta ao menu das aulas
     */
@@ -200,35 +310,7 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     A hora de inicio de uma aula pode ser desde a hora minima de começo atá à hora final
     menos o tempo de duração do tipo de uma aula da UC
     */
-    do
-    {
-        if(uniCurricular.regime == 0)
-        {
-            /*
-            Para conseguir converter as horas ccom formato correto implementamos uma função que
-            recebe por parametros a duracao do tipo de aula em minutos, a hora a que essa alteração
-            vai ser efetuada e o sinal, ou seja 0 para positivo e 1 para negativo, pois assim
-            a mesma função consegue converter a hora de inicio ou a hora de fim
-            */
-            aulaOnline.horaInicio = lerHoraAula(8, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,18,1));
-        }
-        else
-        {
-            aulaOnline.horaInicio = lerHoraAula(18, formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,24,1));
-        }
-
-
-        aulaOnline.horaFim = formatarHoraComDuracaoAula(uniCurricular.aulasOnline[aulaOnline.tipoAula].duracao,aulaOnline.horaInicio,0);
-
-        aulaOnline.data = lerData();
-        horarioAula=verificarHorarioAula(aulasOnline, numAulas, aulaOnline);
-
-        if(horarioAula != 1){
-            printf("\n\nJa existe uma aula da mesma UC marcada para esta data");
-        }
-
-    }
-    while(horarioAula != 1);
+    lerHorarioCompletoAula(uniCurricular,&aulaOnline,aulasOnline, numAulas);
 
     lerString("\n\nNome do Docente: ", aulaOnline.nomeDocente, MAX_STRING);
 
@@ -238,14 +320,14 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     do
     {
         lerString("\n\nDesignacao da aula: ", aulaOnline.designacao, MAX_STRING);
-        designacao = verificarDesignacaoAula(aulasOnline, numAulas, aulaOnline.designacao);
+        designacao = procurarDesignacaoAula(aulasOnline, numAulas, aulaOnline.designacao);
 
-        if(designacao != 1)
+        if(designacao != -1)
         {
             printf("\n\nA designacao da aula tem de ser unica");
         }
     }
-    while( designacao != 1);
+    while( designacao != -1);
 
     aulaOnline.estado = 0;
     aulaOnline.gravada = 0;
@@ -253,7 +335,6 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     return aulaOnline;
 
 }
-
 
 tipoAulaOnline *agendarAulaOnline(tipoAulaOnline aulasOnline[], int *numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
@@ -294,7 +375,6 @@ tipoAulaOnline *agendarAulaOnline(tipoAulaOnline aulasOnline[], int *numAulas, t
 
             aulasOnline[*numAulas] = lerDadosAulaOnline(uniCurriculares[posicao],aulasOnline, *numAulas);
             (*numAulas)++;
-            escreverFiheiroBinarioAulasOnline(aulasOnline, *numAulas);
         }
 
 
@@ -304,4 +384,3 @@ tipoAulaOnline *agendarAulaOnline(tipoAulaOnline aulasOnline[], int *numAulas, t
     return aulasOnline;
 
 }
-
