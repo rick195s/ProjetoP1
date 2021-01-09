@@ -41,7 +41,7 @@ char menuAulas()
 
 
     printf("\n\nA - Agendar Aula Online");
-    printf("\n\nC - Alterar Aula Online");
+    printf("\n\nE - Editar Aula Online");
     printf("\n\nI - Iniciar Aula Online");
     printf("\n\nT - Terminar Aula Online");
     printf("\n\nL - Listar Aulas Online");
