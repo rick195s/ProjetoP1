@@ -2,7 +2,10 @@
 #define FUNCOES_AULAS_H_INCLUDED
 
 #include "constantes.h"
-
+void gravarAulaOnline(tipoAulaOnline *aulaOnline);
+void terminarAulaOnline(tipoAulaOnline *aulaOnline);
+void iniciarAulaOnline(tipoAulaOnline *aulaOnline);
+void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas);
 tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipoUnidadeCurricular uniCurriculares[],int numUCs);
 float formatarHoraComDuracaoAula(int duracao, float hora, int sinal);
 int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnline aulaOnline);

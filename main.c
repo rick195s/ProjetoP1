@@ -88,14 +88,14 @@ int main()
 
                         }
                         break;
-                    case 'F':
+                    case 'V':
                         break;
                     default:
                         system("@cls||clear");
                         printf("\n\n\n\t\tOpcao invalida\n\n\n");
                     }
                 }
-                while(opSubMenus!='F');
+                while(opSubMenus!='V');
 
                 break;
             case 'A':
@@ -120,15 +120,26 @@ int main()
 
                             break;
                         case 'E':
-                            system("@cls||clear");
-                            aulasOnline=editarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
+                            if(numAulas == 0){
+                                system("@cls||clear");
+                                printf("\n\nNao existem aulas");
+                            }else{
+                                system("@cls||clear");
+                                aulasOnline=editarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
+                            }
+
 
                             break;
                         case 'I':
-
-                            break;
-                        case 'T':
-
+                            if(numAulas == 0)
+                            {
+                                system("@cls||clear");
+                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                            }
+                            else
+                            {
+                                administradorAulaOnline(aulasOnline, numAulas);
+                            }
                             break;
 
                         case 'L':
@@ -147,14 +158,14 @@ int main()
                                 }
                             }
                             break;
-                        case 'F':
+                        case 'V':
                             break;
                         default:
                             system("@cls||clear");
                             printf("\n\n\n\t\tOpcao invalida\n\n\n");
                         }
                     }
-                    while(opSubMenus!='F');
+                    while(opSubMenus!='V');
 
 
                 }
