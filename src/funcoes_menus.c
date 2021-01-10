@@ -11,15 +11,20 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/constantes.h"
 
-char menuPrincipal()
+char menuAdministradorAula()
 {
+
     char op;
 
-    printf("\n************************ Menu Principal ************************");
-    printf("\n\nU - Inserir, Alterar ou Listar informacoes de UCs");
-    printf("\n\nA - Agendar, Alterar, Listar aulas online ou Registar estado de aulas");
-    printf("\n\nE - Inserir, Alterar, Listar informacoes de estudantes ou entrar em aula");
-    printf("\n\nF - Fim\n\nOpcao--> ");
+
+    printf("\n************************ Administrador da Aula Online ************************");
+
+
+
+    printf("\n\nI - Iniciar Aula Online");
+    printf("\n\nT - Terminar Aula Online");
+    printf("\n\nG - Gravar Aula Online");
+    printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);
     op=toupper(op);
@@ -41,11 +46,10 @@ char menuAulas()
 
 
     printf("\n\nA - Agendar Aula Online");
-    printf("\n\nE - Editar Aula Online");
-    printf("\n\nI - Iniciar Aula Online");
-    printf("\n\nT - Terminar Aula Online");
+    printf("\n\nE - Editar agendamento ou eliminar Aula Online");
+    printf("\n\nI - Entrar na Aula Online como administrador");
     printf("\n\nL - Listar Aulas Online");
-    printf("\n\nF - Voltar atras\n\nOpcao--> ");
+    printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);
     op=toupper(op);
@@ -69,7 +73,7 @@ char menuUC()
     printf("\n\nI - Inserir UCs");
     printf("\n\nA - Alterar UC");
     printf("\n\nL - Listar UC");
-    printf("\n\nF - Voltar atras\n\nOpcao--> ");
+    printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);
     op=toupper(op);
@@ -79,3 +83,23 @@ char menuUC()
     return op;
 
 }
+
+char menuPrincipal()
+{
+    char op;
+
+    printf("\n************************ Menu Principal ************************");
+    printf("\n\nU - Inserir, Alterar ou Listar informacoes de UCs");
+    printf("\n\nA - Agendar, Alterar, Listar aulas online ou Registar estado de aulas");
+    printf("\n\nE - Inserir, Alterar, Listar informacoes de estudantes ou entrar em aula");
+    printf("\n\nF - Fim\n\nOpcao--> ");
+
+    scanf("%c", &op);
+    op=toupper(op);
+    limpaBufferStdin();
+
+
+    return op;
+
+}
+
