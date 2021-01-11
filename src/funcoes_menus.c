@@ -84,10 +84,11 @@ char menuUC()
 
 }
 
-char menuPrincipal()
+char menuPrincipal(int numUCs, int numAcessos)
 {
     char op;
 
+    printf("\n* Numero de UCs: %d *\t\t* Numero de Acessos a aulas: %d\n", numUCs, numAcessos);
     printf("\n************************ Menu Principal ************************");
     printf("\n\nU - Inserir, Alterar ou Listar informacoes de UCs");
     printf("\n\nA - Agendar, Alterar, Listar aulas online ou Registar estado de aulas");

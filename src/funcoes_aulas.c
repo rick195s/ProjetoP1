@@ -42,14 +42,20 @@ void terminarAulaOnline(tipoAulaOnline *aulaOnline)
 
 void iniciarAulaOnline(tipoAulaOnline *aulaOnline)
 {
-    if(aulaOnline->estado == 0)
+    if(aulaOnline->estado == 0 && aulaOnline->horaInicio != 0 && aulaOnline->horaFim != 0)
     {
         aulaOnline->estado = 1;
         printf("\n\nA aula %s foi iniciada\n\n", aulaOnline->designacao);
     }
     else
     {
-        printf("\n\nA aula esta a decorrer ou ja terminou");
+        if(aulaOnline->estado == 1){
+            printf("\n\nA aula esta a decorrer");
+        }else if(aulaOnline->estado == 2){
+            printf("\n\nA aula ja terminou");
+        }else if(aulaOnline->horaInicio && aulaOnline->horaFim){
+
+        }
     }
 
 }
@@ -64,9 +70,18 @@ void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
 
     posicaoAula=procurarDesignacaoAula(aulasOnline, numAulas, designacao);
 
-    if(posicaoAula != -1)
+    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado != 0 )
     {
-        do
+        if(posicaoAula == -1){
+            printf("\n\nNao existe nenhuma aula com a designacao que inseriu");
+        }else{
+            printf("\n\nNao pode alterar uma aula que esta a decorrer ou ja terminou");
+        }
+
+    }
+    else
+    {
+           do
         {
             opcao = menuAdministradorAula();
 
@@ -90,10 +105,6 @@ void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
         }
         while(opcao != 'V');
 
-    }
-    else
-    {
-        printf("\n\nNao existe nenhuma aula com a designacao que inseriu");
 
     }
 }
