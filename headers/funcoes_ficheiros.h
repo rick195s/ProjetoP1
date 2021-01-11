@@ -3,6 +3,9 @@
 
 #include "constantes.h"
 
+tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int *numAcessos);
+void escreverLogBinarioAcessosAulas(tipoAcessoAula acessosAulas[], int numAcessos);
+void adicionarLogTextoAcessoAulas(tipoAcessoAula acessoAula);
 tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas);
 void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAulas);
 void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs);

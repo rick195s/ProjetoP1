@@ -6,32 +6,36 @@
 #include "headers/funcoes_ficheiros.h"
 #include "headers/funcoes_aulas.h"
 #include "headers/funcoes_uc.h"
+#include "headers/funcoes_acessos.h"
 
 int main()
 {
-
-    tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
-    int numUCs = 0, numAulas = 0,i;
+    int numUCs = 0, numAulas = 0,numAcessos=0, i;
     char op,opSubMenus;
+    tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
     tipoAulaOnline *aulasOnline;
+    tipoAcessoAula *acessosAulas;
 
+    acessosAulas = NULL;
     aulasOnline = NULL;
+    acessosAulas = realloc(acessosAulas,numAcessos*sizeof(tipoAcessoAula));
     aulasOnline = realloc(aulasOnline,numAulas*sizeof(tipoAulaOnline));
 
 
-    if(aulasOnline == NULL)
+    if(aulasOnline == NULL || acessosAulas == NULL)
     {
-
-        printf("\n\nNao foi possivel reservar memoria para as aulas online");
+        printf("\n\nOcorreu um erro ao reservar memoria para");
 
     }
     else
     {
         lerFiheiroBinarioUC(uniCurriculares, &numUCs);
-        aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline,&numAulas);
+        aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas);
+        acessosAulas=lerFicheiroBinarioAcessoAulas(acessosAulas, &numAcessos);
+
         do
         {
-            op=menuPrincipal();
+            op=menuPrincipal(numUCs, numAcessos);
 
 
             switch(op)
@@ -174,7 +178,13 @@ int main()
                 break;
             case 'E':
                 system("@cls||clear");
-
+                acessosAulas=acessoAulaEstudante(acessosAulas, &numAcessos, aulasOnline, numAulas);
+                break;
+            case 'D':
+                system("@cls||clear");
+                for(i=0;i<numAcessos;i++){
+                    listarAcessosAulas(acessosAulas[i]);
+                }
                 break;
             case 'F':
                 break;
@@ -184,6 +194,8 @@ int main()
             }
         }
         while(op!='F');
+
+        escreverLogBinarioAcessosAulas(acessosAulas, numAcessos);
         escreverFiheiroBinarioUC(uniCurriculares, numUCs);
         escreverFiheiroBinarioAulasOnline(aulasOnline, numAulas);
         free(aulasOnline);
