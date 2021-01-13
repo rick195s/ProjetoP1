@@ -48,7 +48,8 @@ char menuAulas()
     printf("\n\nA - Agendar Aula Online");
     printf("\n\nE - Editar agendamento ou eliminar Aula Online");
     printf("\n\nI - Entrar na Aula Online como administrador");
-    printf("\n\nL - Listar Aulas Online");
+    printf("\n\nQ - Listar Aula Online com informacao da UC");
+    printf("\n\nL - Listar Todas as Aulas Online");
     printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);
