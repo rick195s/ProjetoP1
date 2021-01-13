@@ -12,6 +12,7 @@ void lerHorarioCompletoAula(tipoUnidadeCurricular uniCurricular, tipoAulaOnline 
 int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnline aulaOnline);
 float formatarHoraComDuracaoAula(int duracao, float hora, int sinal);
 float lerHoraAula(float inicio, float fim);
+void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs);
 void listarAulasOnline(tipoAulaOnline aulaOnline);
 int verificarQuantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo);
 tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas);

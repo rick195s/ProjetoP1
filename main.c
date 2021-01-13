@@ -24,7 +24,7 @@ int main()
 
     if(aulasOnline == NULL || acessosAulas == NULL)
     {
-        printf("\n\nOcorreu um erro ao reservar memoria para");
+        printf("\n\nOcorreu um erro ao reservar memoria");
 
     }
     else
@@ -145,6 +145,17 @@ int main()
                                 administradorAulaOnline(aulasOnline, numAulas);
                             }
                             break;
+                        case 'Q':
+                            if(numAulas == 0)
+                            {
+                                system("@cls||clear");
+                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                            }
+                            else
+                            {
+                                listarInformacoesUCdaAula(aulasOnline,numAulas,uniCurriculares,numUCs);
+                            }
+                            break;
 
                         case 'L':
                             if(numAulas == 0)
@@ -156,7 +167,6 @@ int main()
                             {
                                 for(i=0; i<numAulas; i++)
                                 {
-
                                     listarAulasOnline(aulasOnline[i]);
 
                                 }
