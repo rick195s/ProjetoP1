@@ -3,9 +3,10 @@
 
 #include "constantes.h"
 
-char menuPrincipal();
-char menuUC();
+char menuAdministradorAula();
 char menuAulas();
+char menuUC();
+char menuPrincipal(int numUCs, int numAcessos);
 
 
 #endif // FUNCOES_MENUS_H_INCLUDED

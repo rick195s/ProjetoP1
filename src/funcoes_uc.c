@@ -118,7 +118,7 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         codigo=uniCurriculares[posicao].codigo;
         uniCurriculares[posicao]=lerDadosUC();
         uniCurriculares[posicao].codigo=codigo;
-        escreverFiheiroBinarioUC(uniCurriculares, numUCs);
+
     }
     else
     {
@@ -236,8 +236,6 @@ int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         system("@cls||clear");
 
     }
-
-    escreverFiheiroBinarioUC(uniCurriculares, up_numUCs);
 
 
 

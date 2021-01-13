@@ -5,6 +5,119 @@
 #include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_ficheiros.h"
 
+tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int *numAcessos){
+
+    FILE *ficheiro;
+
+    int erro,numLido;
+    tipoAcessoAula *aux;
+
+
+    ficheiro = fopen("ficheiros/AcessosAulas.dat","rb");
+
+    if(ficheiro == NULL )
+    {
+        printf("\n\nOcorreu um erro ao ler o ficheiro dos acessoas as aulas");
+
+    }
+    else
+    {
+        //Le o número de acessos a aulas existentes até ao momento no ficheiro
+        fread(&(*numAcessos), sizeof(int), 1, ficheiro);
+        aux = acessosAulas;
+        acessosAulas = realloc(acessosAulas, (*numAcessos)*sizeof(tipoAcessoAula));
+
+
+        if(acessosAulas == NULL)
+        {
+            printf("\n\nNao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas");
+            acessosAulas = aux;
+        }
+        else
+        {
+            //Le todos os acessos as aulas
+            numLido=fread(acessosAulas, sizeof(tipoAcessoAula), *numAcessos, ficheiro);
+            printf("\n\t\t\tElementos lidos: %d\n", numLido);
+
+            erro = fclose(ficheiro);
+
+            if(erro != 0)
+            {
+
+                printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+            }
+        }
+
+    }
+
+
+    return acessosAulas;
+}
+
+void escreverLogBinarioAcessosAulas(tipoAcessoAula acessosAulas[], int numAcessos){
+
+    FILE *ficheiro;
+
+    int erro;
+
+    ficheiro = fopen("ficheiros/AcessosAulas.dat", "wb");
+
+    if(ficheiro == NULL)
+    {
+        printf("\n\nOcorreu um erro ao escrever no ficheiro dos acessos a aulas");
+    }
+    else
+    {
+        //Escreve o número de UCs existentes até ao momento no ficheiro
+        fwrite(&numAcessos, sizeof(int), 1, ficheiro);
+        //Acrescenta o acesso à aula online no ficheiro binario
+        fwrite(acessosAulas, sizeof(tipoAcessoAula), numAcessos, ficheiro);
+
+        erro = fclose(ficheiro);
+
+        if(erro != 0)
+        {
+
+            printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+        }
+    }
+
+}
+
+void adicionarLogTextoAcessoAulas(tipoAcessoAula acessoAula){
+
+    FILE *ficheiro;
+
+    int erro;
+
+    ficheiro = fopen("ficheiros/AcessosAulas.log", "a");
+
+    if(ficheiro == NULL)
+    {
+        printf("\n\nOcorreu um erro ao escrever no log dos acessos as aulas");
+    }
+    else
+    {
+        //Acrecenta o acesso à aula online no ficheiro de texto
+        fprintf(ficheiro, "%s - ", acessoAula.designacaoAula);
+        fprintf(ficheiro, "%d - ", acessoAula.numeroEstudante);
+        if(acessoAula.tipoAcesso == 0){
+            fprintf(ficheiro, "Online\n");
+        }else{
+            fprintf(ficheiro, "Offline\n");
+
+        }
+
+        erro = fclose(ficheiro);
+
+        if(erro != 0)
+        {
+
+            printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
+        }
+    }
+}
+
 tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *numAulas)
 {
 
@@ -99,8 +212,6 @@ void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAula
 
 void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs)
 {
-
-
 
 
     FILE *ficheiro;
