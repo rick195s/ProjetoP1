@@ -20,7 +20,7 @@ void gravarAulaOnline(tipoAulaOnline *aulaOnline)
     }
     else
     {
-        printf("\n\nA aula ainda nao foi iniciada ou ja terminou");
+        printf("\n\nA aula ainda nao foi iniciada ou jfekwhfwea terminou");
     }
 }
 
