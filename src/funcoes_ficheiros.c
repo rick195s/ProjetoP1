@@ -4,6 +4,7 @@
 
 #include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_ficheiros.h"
+#include "../headers/funcoes_auxiliares.h"
 
 tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int *numAcessos){
 
@@ -17,7 +18,7 @@ tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int
 
     if(ficheiro == NULL )
     {
-        printf("\n\nOcorreu um erro ao ler o ficheiro dos acessoas as aulas");
+        mostrarMensagem("Ocorreu um erro ao ler o ficheiro dos acessoas as aulas",0);
 
     }
     else
@@ -30,7 +31,7 @@ tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int
 
         if(acessosAulas == NULL)
         {
-            printf("\n\nNao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas");
+            mostrarMensagem("Nao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas",0);
             acessosAulas = aux;
         }
         else
@@ -43,7 +44,6 @@ tipoAcessoAula *lerFicheiroBinarioAcessoAulas(tipoAcessoAula acessosAulas[], int
 
             if(erro != 0)
             {
-
                 printf("\n\nOcorreu um erro ao fechar o ficheiro %d", erro);
             }
         }
@@ -64,7 +64,7 @@ void escreverLogBinarioAcessosAulas(tipoAcessoAula acessosAulas[], int numAcesso
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao escrever no ficheiro dos acessos a aulas");
+        mostrarMensagem("Ocorreu um erro ao escrever no ficheiro dos acessoas as aulas",0);
     }
     else
     {
@@ -94,7 +94,7 @@ void adicionarLogTextoAcessoAulas(tipoAcessoAula acessoAula){
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao escrever no log dos acessos as aulas");
+        mostrarMensagem("Ocorreu um erro ao escrever no log dos acessos as aulas",0);
     }
     else
     {
@@ -134,7 +134,7 @@ tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *n
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao ler o ficheiro das aulas online");
+        mostrarMensagem("Ocorreu um erro ao ler o ficheiro das aulas online",0);
 
     }
     else
@@ -148,7 +148,7 @@ tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *n
 
         if(aulasOnline == NULL && *numAulas != 0)
         {
-            printf("\n\nNao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas");
+            mostrarMensagem("Nao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas",0);
             aulasOnline = aux;
         }
         else
@@ -185,7 +185,7 @@ void escreverFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int numAula
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao escrever no ficheiro das aulas online");
+        mostrarMensagem("Ocorreu um erro ao escrever no ficheiro das aulas online",0);
     }
     else
     {
@@ -223,7 +223,7 @@ void lerFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int *numUCs)
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao ler o ficheiro das unidades curriculares");
+        mostrarMensagem("Ocorreu um erro ao ler o ficheiro das unidades curriculares",0);
     }
     else
     {
@@ -259,7 +259,7 @@ void escreverFiheiroBinarioUC(tipoUnidadeCurricular uniCurriculares[], int numUC
 
     if(ficheiro == NULL)
     {
-        printf("\n\nOcorreu um erro ao escrever no ficheiro das unidades curriculares");
+        mostrarMensagem("Ocorreu um erro ao escrever no ficheiro das unidades curriculares",0);
     }
     else
     {

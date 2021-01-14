@@ -229,7 +229,7 @@
 	"../headers/funcoes_auxiliares.h"
 	"../headers/funcoes_menus.h"
 
-1610316343 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\main.c
+1610629826 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"headers/funcoes_menus.h"
@@ -237,37 +237,40 @@
 	"headers/funcoes_ficheiros.h"
 	"headers/funcoes_aulas.h"
 	"headers/funcoes_uc.h"
+	"headers/funcoes_acessos.h"
+	"headers/funcoes_auxiliares.h"
 
-1610316060 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_menus.h
+1610534500 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_menus.h
 	"constantes.h"
 
-1610185676 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\constantes.h
+1610534500 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\constantes.h
 
-1610185676 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_ficheiros.h
+1610534500 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_ficheiros.h
 	"constantes.h"
 
-1610315909 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_aulas.h
+1610534500 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_aulas.h
 	"constantes.h"
 
-1610185676 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_uc.h
+1610528914 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_uc.h
 	"constantes.h"
 
-1610185676 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_auxiliares.c
+1610631337 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_auxiliares.c
 	<stdio.h>
 	<string.h>
+	<stdlib.h>
 	"../headers/funcoes_auxiliares.h"
 
-1610185676 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_auxiliares.h
+1610629701 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_auxiliares.h
 	"../headers/constantes.h"
 
-1610185676 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_ficheiros.c
+1610534500 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_ficheiros.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_ficheiros.h"
 
-1610316228 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_menus.c
+1610534500 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_menus.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -278,7 +281,7 @@
 	"../headers/funcoes_ficheiros.h"
 	"../headers/constantes.h"
 
-1610185811 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_uc.c
+1610534500 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_uc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -287,7 +290,7 @@
 	"../headers/funcoes_ficheiros.h"
 	"../headers/funcoes_auxiliares.h"
 
-1610316429 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_aulas.c
+1610630544 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_aulas.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -313,6 +316,19 @@
 	"constantes.h"
 
 1610528914 source:c:\users\ricar_yd80u\onedrive - ipleiria\p1\projetop1\src\funcoes_acessos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../headers/funcoes_acessos.h"
+	"../headers/constantes.h"
+	"../headers/funcoes_auxiliares.h"
+	"../headers/funcoes_aulas.h"
+	"../headers/funcoes_ficheiros.h"
+
+1610628022 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_acessos.h
+	"constantes.h"
+
+1610629865 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_acessos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

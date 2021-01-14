@@ -16,11 +16,11 @@ void gravarAulaOnline(tipoAulaOnline *aulaOnline)
     if(aulaOnline->estado == 1)
     {
         aulaOnline->gravada = 1;
-        printf("\n\nA aula %s esta a ser gravada\n\n", aulaOnline->designacao);
+        mostrarMensagem("A aula esta a ser gravda",1);
     }
     else
     {
-        printf("\n\nA aula ainda nao foi iniciada ou jfekwhfwea terminou");
+        mostrarMensagem("A aula ainda nao foi iniciada",0);
     }
 }
 
@@ -30,32 +30,29 @@ void terminarAulaOnline(tipoAulaOnline *aulaOnline)
     if(aulaOnline->estado == 1)
     {
         aulaOnline->estado = 2;
-        printf("\n\nA aula %s foi terminada\n\n", aulaOnline->designacao);
-
+        mostrarMensagem("A aula foi terminada",1);
     }
     else
     {
-        printf("\n\nA aula ainda nao foi iniciada ou ja terminou");
+        mostrarMensagem("A aula ainda nao foi iniciada",0);
     }
 
 }
 
 void iniciarAulaOnline(tipoAulaOnline *aulaOnline)
 {
-    if(aulaOnline->estado == 0 && aulaOnline->horaInicio != 0 && aulaOnline->horaFim != 0)
+    if(aulaOnline->estado == 0)
     {
         aulaOnline->estado = 1;
-        printf("\n\nA aula %s foi iniciada\n\n", aulaOnline->designacao);
+        mostrarMensagem("A aula foi iniciada",1);
     }
     else
     {
-        if(aulaOnline->estado == 1){
-            printf("\n\nA aula esta a decorrer");
-        }else if(aulaOnline->estado == 2){
-            printf("\n\nA aula ja terminou");
-        }else if(aulaOnline->horaInicio && aulaOnline->horaFim){
-
+        if(aulaOnline->estado == 1)
+        {
+            mostrarMensagem("A aula ja esta a decorrer",0);
         }
+
     }
 
 }
@@ -70,18 +67,21 @@ void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
 
     posicaoAula=procurarDesignacaoAula(aulasOnline, numAulas, designacao);
 
-    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado != 0 )
+    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado == 2 )
     {
-        if(posicaoAula == -1){
-            printf("\n\nNao existe nenhuma aula com a designacao que inseriu");
-        }else{
-            printf("\n\nNao pode alterar uma aula que esta a decorrer ou ja terminou");
+        if(posicaoAula == -1)
+        {
+            mostrarMensagem("Nao existe nenhuma aula com a designacao que inseriu",0);
+        }
+        else
+        {
+            mostrarMensagem("Nao pode alterar uma aula que ja terminou",0);
         }
 
     }
     else
     {
-           do
+        do
         {
             opcao = menuAdministradorAula();
 
@@ -99,11 +99,12 @@ void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
             case 'V':
                 break;
             default:
+                mostrarMensagem("Opcao invalida",0);
                 break;
 
             }
         }
-        while(opcao != 'V');
+        while(opcao != 'V' && aulasOnline[posicaoAula].estado != 2);
 
 
     }
@@ -123,7 +124,7 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
 
     if(posicaoAula == -1)
     {
-        printf("\n\nNao existem aulas com a desginacao igual a que introduziu");
+        mostrarMensagem("Nao existem aulas com a desginacao igual a que introduziu",0);
     }
     else
     {
@@ -134,13 +135,13 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
             posicaoUC=procurarUC(aulasOnline[posicaoAula].codigoUC, uniCurriculares, numUCs);
             if(posicaoUC == -1)
             {
-                printf("\n\nOcorreu um erro ao procurar a unidade curricular correspondente a aula que pretende alterar");
+                mostrarMensagem("Ocorreu um erro ao procurar a unidade curricular correspondente a aula que pretende alterar",0);
             }
             else
             {
                 if(aulasOnline[posicaoAula].estado != 0)
                 {
-                    printf("\n\nO agendamento da aula nao pode ser alterado pois a aula esta a decorrer ou ja foi realizada");
+                    mostrarMensagem("O agendamento da aula nao pode ser alterado pois a aula esta a decorrer ou ja foi realizada",0);
                 }
                 else
                 {
@@ -160,7 +161,7 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
 
             if(aulasOnline == NULL)
             {
-                printf("\n\nOcorreu um erro a reservar mais memoria ao eliminar aula online");
+                mostrarMensagem("Ocorreu um erro a reservar mais memoria ao eliminar aula online",0);
                 aulasOnline=aux;
 
             }
@@ -175,18 +176,23 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
     return aulasOnline;
 }
 
-void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs){
+void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs)
+{
 
     int posicaoUC, posicaoAula;
     char desginacao[MAX_STRING];
 
     lerString("\n\nInsira a designacao da aula: ", desginacao, MAX_STRING);
     posicaoAula=procurarDesignacaoAula(aulasOnline, numAulas, desginacao);
-    if(posicaoAula == -1){
-        printf("\n\nNao existe nenhuma aula com a desgnacao que inseriu");
-    }else{
+    if(posicaoAula == -1)
+    {
+        mostrarMensagem("Nao existe nenhuma aula com a desgnacao que inseriu",0);
+    }
+    else
+    {
         posicaoUC=procurarUC(aulasOnline[posicaoAula].codigoUC,uniCurriculares,numUCs);
         listarAulasOnline(aulasOnline[posicaoAula]);
+
         printf("\n\nInformacoes da UC:");
         printf("\n\n\tDesginacao: %s", uniCurriculares[posicaoUC].designacao);
         printf("\n\n\tQuantidade de Aulas por agendar: ");
@@ -194,7 +200,7 @@ void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoU
         printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[1].designacao, (uniCurriculares[posicaoUC].aulasOnline[1].quantidade-verificarQuantidadeAulasTipo(uniCurriculares[posicaoUC],1,aulasOnline,numAulas,0)));
         printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[2].designacao, (uniCurriculares[posicaoUC].aulasOnline[2].quantidade-verificarQuantidadeAulasTipo(uniCurriculares[posicaoUC],2,aulasOnline,numAulas,0)));
 
-}
+    }
 
 }
 
@@ -207,16 +213,24 @@ void listarAulasOnline(tipoAulaOnline aulaOnline)
     printf("\n\n\tData:\n\t\tHora de Inicio: %.2f", aulaOnline.horaInicio);
     printf("\n\n\t\tHora de Fim: %.2f", aulaOnline.horaFim);
     printf("\n\n\t\t%d/%d/%d", aulaOnline.data.dia, aulaOnline.data.mes, aulaOnline.data.ano);
-    if(aulaOnline.estado == 0){
+    if(aulaOnline.estado == 0)
+    {
         printf("\n\n\tEstado: Agendada");
-    }else if(aulaOnline.estado == 1){
+    }
+    else if(aulaOnline.estado == 1)
+    {
         printf("\n\n\tEstado: A decorrer");
-    }else{
+    }
+    else
+    {
         printf("\n\n\tEstado: Terminada");
     }
-    if(aulaOnline.gravada == 0){
+    if(aulaOnline.gravada == 0)
+    {
         printf("\n\n\tGravada: Nao");
-    }else{
+    }
+    else
+    {
         printf("\n\n\tGravada: Sim");
     }
 
@@ -329,7 +343,7 @@ void lerHorarioCompletoAula(tipoUnidadeCurricular uniCurricular, tipoAulaOnline 
 
         if(horarioAula != 1)
         {
-            printf("\n\nJa existe uma aula da mesma UC marcada para esta data");
+            mostrarMensagem("Ja existe uma aula da mesma UC marcada para esta data",0);
         }
         else
         {
@@ -442,13 +456,11 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
 
         if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
         {
-            system("@cls||clear");
-            printf("\n\nEsta unidade curricular nao tem este tipo de aulas");
+            mostrarMensagem("Esta unidade curricular nao tem este tipo de aulas",0);
         }
         else if((uniCurricular.aulasOnline[ aulaOnline.tipoAula].quantidade-quantidadeAulas) <= 0)
         {
-            system("@cls||clear");
-            printf("\n\nEsta unidade curricular ja tem todas as aulas deste tipo agendadas");
+            mostrarMensagem("Esta unidade curricular ja tem todas as aulas deste tipo agendadas",0);
         }
 
     }
@@ -471,7 +483,7 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
 
         if(designacao != -1)
         {
-            printf("\n\nA designacao da aula tem de ser unica");
+            mostrarMensagem("A designacao da aula tem de ser unica",0);
         }
     }
     while( designacao != -1);
@@ -498,22 +510,16 @@ tipoAulaOnline *agendarAulaOnline(tipoAulaOnline aulasOnline[], int *numAulas, t
 
     if(posicao == -1 )
     {
-
-        system("@cls||clear");
-        printf("\n\n\tA unidade curricular que introduziu nao existe\n\n");
+        mostrarMensagem("A unidade curricular que introduziu nao existe",0);
 
     }
     else
     {
-
-
         aulasOnline = realloc(aulasOnline, (*numAulas+1)*sizeof(tipoAulaOnline));
 
         if(aulasOnline == NULL)
         {
-            system("@cls||clear");
-
-            printf("\n\n\tNao foi possivel reservar memoria para as aulas online ao agendar aula\n\n");
+            mostrarMensagem("Nao foi possivel reservar memoria para as aulas online ao agendar aula",0);
             aulasOnline = aux;
 
         }
