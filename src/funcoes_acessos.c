@@ -22,7 +22,7 @@ void listarAcessosAulas(tipoAcessoAula acessoAula){
     }
 }
 
-tipoAcessoAula acrescentarDadosAcesso(tipoAcessoAula acessosAulas[], tipoAulaOnline aulaOnline){
+tipoAcessoAula acrescentarDadosAcesso( tipoAulaOnline aulaOnline){
 
     tipoAcessoAula acessoAula;
 
@@ -51,25 +51,25 @@ tipoAcessoAula *acessoAulaEstudante(tipoAcessoAula acessosAulas[], int *numAcess
 
     posicaoAula=procurarDesignacaoAula(aulasOnline,numAulas,designacao);
 
-    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado == 0){
+    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado == 0 || (aulasOnline[posicaoAula].estado == 2 && aulasOnline[posicaoAula].gravada == 0 )){
         if(posicaoAula == -1){
-            system("@cls||clear");
-            printf("\n\nNao existe nenhuma aula com a desginacao que introduziu");
+            mostrarMensagem("Nao existe nenhuma aula com a desginacao que introduziu",0);
+        }else if(aulasOnline[posicaoAula].estado == 0){
+            mostrarMensagem("A aula que pretende assistir ainda nao comecou",0);
         }else{
-            system("@cls||clear");
-            printf("\n\nA aula que pretende assistir ainda nao comecou");
+            mostrarMensagem("Nao pode aceder a aula porque ja terminou e nao foi gravada",0);
         }
+
     }else{
 
         acessosAulas=realloc(acessosAulas, (*numAcessos+1)*sizeof(tipoAcessoAula));
 
         if(acessosAulas == NULL){
             acessosAulas=aux;
-            system("@cls||clear");
-            printf("\n\nOcocrreu um erro para reservar memoria ao adicionar acesso a aula");
+            mostrarMensagem("Ococrreu um erro para reservar memoria ao adicionar acesso a aula",0);
         }else{
 
-            acessosAulas[*numAcessos] = acrescentarDadosAcesso(acessosAulas, aulasOnline[posicaoAula]);
+            acessosAulas[*numAcessos] = acrescentarDadosAcesso(aulasOnline[posicaoAula]);
             (*numAcessos)++;
         }
     }

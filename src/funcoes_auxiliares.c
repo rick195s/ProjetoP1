@@ -1,10 +1,20 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 
 #include "../headers/funcoes_auxiliares.h"
 
+void mostrarMensagem(char mensagem[MAX_STRING], int tipo){
 
+
+    system("@cls||clear");
+    if(tipo == 1){
+        printf("\nSucesso:");
+    }else{
+        printf("\nErro:");
+    }
+    printf("\n\n\t\t%s\n\n\n", mensagem);
+}
 // Acrescentada variavel controlo para repetir insercao se ao for inserido numero int
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo)
 {

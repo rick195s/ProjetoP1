@@ -7,6 +7,7 @@
 #include "headers/funcoes_aulas.h"
 #include "headers/funcoes_uc.h"
 #include "headers/funcoes_acessos.h"
+#include "headers/funcoes_auxiliares.h"
 
 int main()
 {
@@ -24,8 +25,7 @@ int main()
 
     if(aulasOnline == NULL || acessosAulas == NULL)
     {
-        printf("\n\nOcorreu um erro ao reservar memoria");
-
+        mostrarMensagem("Ocorreu um erro ao reservar memoria",0);
     }
     else
     {
@@ -56,16 +56,14 @@ int main()
                         }
                         else
                         {
-                            system("@cls||clear");
-                            printf("\n\n\n\t\tO numero maximo de UCs foi alcancado\n\n\n");
+                            mostrarMensagem("O numero maximo de UCs foi alcancado",0);
                         }
 
                         break;
                     case 'A':
                         if(numUCs == 0)
                         {
-                            system("@cls||clear");
-                            printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
+                            mostrarMensagem("Nao existem unidades curriculares",0);
 
                         }
                         else
@@ -77,8 +75,7 @@ int main()
                     case 'L':
                         if(numUCs == 0)
                         {
-                            system("@cls||clear");
-                            printf("\n\n\n\t\tNao existem unidades curriculares\n\n\n");
+                            mostrarMensagem("Nao existem unidades curriculares",0);
 
                         }
                         else
@@ -95,8 +92,7 @@ int main()
                     case 'V':
                         break;
                     default:
-                        system("@cls||clear");
-                        printf("\n\n\n\t\tOpcao invalida\n\n\n");
+                        mostrarMensagem("Opcao invalida",0);
                     }
                 }
                 while(opSubMenus!='V');
@@ -105,8 +101,7 @@ int main()
             case 'A':
                 if(numUCs == 0)
                 {
-                    system("@cls||clear");
-                    printf("\n\n\tPara conseguir entrar no menu de aulas online primeiro e necessario criar unidades curriculares\n\n");
+                    mostrarMensagem("Para conseguir entrar no menu de aulas online primeiro e necessario criar unidades curriculares",0);
                 }
                 else
                 {
@@ -124,10 +119,13 @@ int main()
 
                             break;
                         case 'E':
-                            if(numAulas == 0){
-                                system("@cls||clear");
-                                printf("\n\nNao existem aulas");
-                            }else{
+                            if(numAulas == 0)
+                            {
+                                mostrarMensagem("Nao existem aulas para editar",0);
+
+                            }
+                            else
+                            {
                                 system("@cls||clear");
                                 aulasOnline=editarAulaOnline(aulasOnline, &numAulas, uniCurriculares, numUCs);
                             }
@@ -137,8 +135,7 @@ int main()
                         case 'I':
                             if(numAulas == 0)
                             {
-                                system("@cls||clear");
-                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                                mostrarMensagem("Nao existem aulas para apresentar",0);
                             }
                             else
                             {
@@ -148,8 +145,7 @@ int main()
                         case 'Q':
                             if(numAulas == 0)
                             {
-                                system("@cls||clear");
-                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                                mostrarMensagem("Nao existem aulas para apresentar",0);
                             }
                             else
                             {
@@ -160,8 +156,7 @@ int main()
                         case 'L':
                             if(numAulas == 0)
                             {
-                                system("@cls||clear");
-                                printf("\n\n\tNao existem aulas para apresentar\n\n");
+                                mostrarMensagem("Nao existem aulas para apresentar",0);
                             }
                             else
                             {
@@ -175,8 +170,7 @@ int main()
                         case 'V':
                             break;
                         default:
-                            system("@cls||clear");
-                            printf("\n\n\n\t\tOpcao invalida\n\n\n");
+                            mostrarMensagem("Opcao invalida",0);
                         }
                     }
                     while(opSubMenus!='V');
@@ -192,15 +186,15 @@ int main()
                 break;
             case 'D':
                 system("@cls||clear");
-                for(i=0;i<numAcessos;i++){
+                for(i=0; i<numAcessos; i++)
+                {
                     listarAcessosAulas(acessosAulas[i]);
                 }
                 break;
             case 'F':
                 break;
             default:
-                system("@cls||clear");
-                printf("\n\n\n\t\tOpcao invalida\n\n\n");
+                mostrarMensagem("Opcao invalida",0);
             }
         }
         while(op!='F');

@@ -122,13 +122,11 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     }
     else
     {
-        printf("\n\nNao existe nenhuma unidade curricular com o codigo igual ao que introduziu");
-
+        mostrarMensagem("Nao existe nenhuma unidade curricular com o codigo igual ao que introduziu",0);
     }
 
 
 }
-
 
 int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {
