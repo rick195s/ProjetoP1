@@ -10,9 +10,9 @@
 
 void listarAcessosAulas(tipoAcessoAula acessoAula){
 
-    system("@cls||clear");
+
     printf("\n\nNumero do estudante: %d", acessoAula.numeroEstudante);
-    printf("\n\nDesginacao da aula: %s", acessoAula.designacaoAula);
+    printf("\n\nDesignacao da aula: %s", acessoAula.designacaoAula);
     if(acessoAula.tipoAcesso == 0){
         printf("\n\nTipo de acesso: Online");
 

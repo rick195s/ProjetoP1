@@ -3,13 +3,13 @@
 
 #include "constantes.h"
 
+void listarUC(tipoUnidadeCurricular uniCurricular,tipoAulaOnline aulasOnline[], int numAulas);
+int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs);
+void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs);
 int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs);
 void lerUCTipoAulas(tipoAulas tipoAulas[]);
 tipoUnidadeCurricular lerDadosUC();
 int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs);
-void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs);
-int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs);
-void listarUC(tipoUnidadeCurricular uniCurricular, int detalhes);
-void obterUC(tipoUnidadeCurricular *uniCurricular, int posicao);
+
 
 #endif // FUNCOES_UC_H_INCLUDED
