@@ -6,8 +6,9 @@
 #include "../headers/funcoes_uc.h"
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
+#include "../headers/funcoes_aulas.h"
 
-void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
+void listarUC(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas)
 {
 
     /*
@@ -18,11 +19,6 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
     int i;
 
 
-    if(detalhes == 1)
-    {
-
-
-    }
 
     printf("\n\nDados da UC:");
     printf("\n\n\tCodigo: %d", uniCurricular.codigo);
@@ -56,12 +52,30 @@ void listarUC(tipoUnidadeCurricular uniCurricular,int detalhes)
         {
 
             printf("\n\t\t%s:",  uniCurricular.aulasOnline[i].designacao);
-            printf("\n\t\t\tQuantidade: %d aula(s)",  uniCurricular.aulasOnline[i].quantidade );
+            printf("\n\t\t\tQuantidade de aulas previstas: %d aula(s)",  uniCurricular.aulasOnline[i].quantidade);
+            printf("\n\t\t\tQuantidade de aulas agendadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,1));
+            printf("\n\t\t\tQuantidade de aulas realizadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,0));
             printf("\n\t\t\tDuracao: %d minuto(s)",  uniCurricular.aulasOnline[i].duracao );
+
         }
 
     }
 
+    for(i=0;i<numAulas;i++){
+        if(aulasOnline[i].codigoUC == uniCurricular.codigo && aulasOnline[i].estado == 0){
+            if(aulasOnline[i].tipoAula == 0){
+                printf("\n\n\tTipo da Aula: T");
+
+            }else if(aulasOnline[i].tipoAula == 1){
+                printf("\n\n\tTipo da Aula: TP");
+
+            }else{
+                printf("\n\n\tTipo da Aula: PL");
+            }
+            printf("\n\n\tData: %d/%d/%d", aulasOnline[i].data.dia,aulasOnline[i].data.mes,aulasOnline[i].data.ano);
+            printf("\n\n\tHora de Inicio: %.2f", aulasOnline[i].horaInicio);
+        }
+    }
 
 }
 
@@ -83,8 +97,7 @@ int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs
         if(uniCurriculares[i].codigo == codigoUC)
         {
             posicao = i;
-
-
+            i=numUCs;
         }
 
     }
@@ -110,7 +123,7 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     if(posicao != -1)
     {
         //Mostra a unidade curricular que foi encontrada
-        listarUC(uniCurriculares[posicao],0);
+
         /*
         Guarda o código da unidade curricular numa variavel local para depois
         de a mesma ser alterada continuar com o mesmo código
@@ -206,7 +219,6 @@ tipoUnidadeCurricular lerDadosUC()
 
     return uniCurricular;
 }
-
 
 int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs)
 {

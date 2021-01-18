@@ -8,7 +8,7 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 #include "../headers/funcoes_menus.h"
-
+#include "../headers/funcoes_acessos.h"
 
 void gravarAulaOnline(tipoAulaOnline *aulaOnline)
 {
@@ -176,10 +176,10 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
     return aulasOnline;
 }
 
-void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs)
+void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAcessoAula acessosAula[], int numAcessos)
 {
 
-    int posicaoUC, posicaoAula;
+    int posicaoUC, posicaoAula,i;
     char desginacao[MAX_STRING];
 
     lerString("\n\nInsira a designacao da aula: ", desginacao, MAX_STRING);
@@ -191,21 +191,22 @@ void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoU
     else
     {
         posicaoUC=procurarUC(aulasOnline[posicaoAula].codigoUC,uniCurriculares,numUCs);
-        listarAulasOnline(aulasOnline[posicaoAula]);
+        listarAulaOnline(aulasOnline[posicaoAula],acessosAula, numAcessos);
 
         printf("\n\nInformacoes da UC:");
         printf("\n\n\tDesginacao: %s", uniCurriculares[posicaoUC].designacao);
         printf("\n\n\tQuantidade de Aulas por agendar: ");
-        printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[0].designacao, (uniCurriculares[posicaoUC].aulasOnline[0].quantidade-verificarQuantidadeAulasTipo(uniCurriculares[posicaoUC],0,aulasOnline,numAulas,0)));
-        printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[1].designacao, (uniCurriculares[posicaoUC].aulasOnline[1].quantidade-verificarQuantidadeAulasTipo(uniCurriculares[posicaoUC],1,aulasOnline,numAulas,0)));
-        printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[2].designacao, (uniCurriculares[posicaoUC].aulasOnline[2].quantidade-verificarQuantidadeAulasTipo(uniCurriculares[posicaoUC],2,aulasOnline,numAulas,0)));
-
+        for(i=0; i<TIPOS_AULA; i++)
+        {
+            printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[i].designacao, (uniCurriculares[posicaoUC].aulasOnline[i].quantidade-quantidadeAulasTipo(uniCurriculares[posicaoUC],i,aulasOnline,numAulas,0)));
+        }
     }
 
 }
 
-void listarAulasOnline(tipoAulaOnline aulaOnline)
+void listarAulaOnline(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAula[], int numAcessos)
 {
+    int i, acessoGravacoes=0, estudantesPresent=0;
 
     printf("\n\nDesignacao da Aula: %s", aulaOnline.designacao);
     printf("\n\n\tCodigo da UC: %d", aulaOnline.codigoUC);
@@ -224,7 +225,22 @@ void listarAulasOnline(tipoAulaOnline aulaOnline)
     else
     {
         printf("\n\n\tEstado: Terminada");
+
+        for(i=0;i<numAcessos;i++){
+
+            if(strcmp(acessosAula[i].designacaoAula,aulaOnline.designacao)==0){
+                if(acessosAula[i].tipoAcesso == 0){
+                    estudantesPresent++;
+                }else{
+                    acessoGravacoes++;
+                }
+            }
+        }
+        printf("\n\n\tQuantidade de alunos presentes: %d", estudantesPresent);
+        printf("\n\n\tQuantidade de acessos as gravacoes: %d", acessoGravacoes);
     }
+
+
     if(aulaOnline.gravada == 0)
     {
         printf("\n\n\tGravada: Nao");
@@ -248,7 +264,7 @@ int procurarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char desi
         {
             posicaoAula = i;
 
-            return posicaoAula;
+            i=numAulas;
         }
 
     }
@@ -257,49 +273,44 @@ int procurarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char desi
     return posicaoAula;
 }
 
-int verificarQuantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int todosTipo)
+int quantidadeAulasTipo(tipoUnidadeCurricular uniCurricular, int tipoAula, tipoAulaOnline aulasOnline[], int numAulas, int op)
 {
 
 
     /*
-    Esta função tem a responsabilidade de verificar quantas aulas do tipo "tipoAula"
-    existem na unidade curriular a que a aula vai ser associada, mas se o argumento
-    "todosTipo" estiver a 1 esta função vai devolver a quantidade total de todo o tipo
-    de aulas existentes na uc que faltam agendar
+
+    op:
+        0-quantidade de aulas realizadas por tipo
+        1-quantidade de aulas agendadas por tipo
+        2-quantidade de aulas que existem na uc por tipo
+
     */
 
 
-    int i,quantidade=0,tipos=0;
+    int i,quantidade=0;
 
-    if(todosTipo == 1)
+    for(i=0; i<numAulas; i++)
     {
-        for(i=0; i<numAulas; i++)
+        if(aulasOnline[i].codigoUC == uniCurricular.codigo && aulasOnline[i].tipoAula == tipoAula)
         {
-            if(aulasOnline[i].codigoUC == uniCurricular.codigo && (aulasOnline[i].tipoAula >= 0 || aulasOnline[i].tipoAula < TIPOS_AULA))
+            if(op == 0 && aulasOnline[i].estado == 2)
             {
-
                 quantidade++;
-
             }
-        }
-        for(i=0; i<TIPOS_AULA; i++)
-        {
-            tipos+=uniCurricular.aulasOnline[i].quantidade;
-        }
-        quantidade = tipos - quantidade;
-    }
-    else
-    {
-        for(i=0; i<numAulas; i++)
-        {
-            if(aulasOnline[i].codigoUC == uniCurricular.codigo && aulasOnline[i].tipoAula == tipoAula)
+
+            if(op == 1 && aulasOnline[i].estado == 0)
             {
-
                 quantidade++;
-
             }
+
+            if(op == 2){
+                quantidade++;
+            }
+
+
         }
     }
+
 
     return quantidade;
 }
@@ -376,7 +387,7 @@ int verificarHorarioAula(tipoAulaOnline aulasOnline[], int numAulas, tipoAulaOnl
 
             unica = 0;
 
-            return unica;
+            i=numAulas;
         }
 
     }
@@ -452,13 +463,13 @@ tipoAulaOnline lerDadosAulaOnline(tipoUnidadeCurricular uniCurricular, tipoAulaO
     do
     {
         aulaOnline.tipoAula = lerInteiro("\n\nTipo de aula\n\n0 - T\n\n1 - TP\n\n2 - PL  ",0,2);
-        quantidadeAulas = verificarQuantidadeAulasTipo(uniCurricular, aulaOnline.tipoAula, aulasOnline, numAulas,0);
+        quantidadeAulas = quantidadeAulasTipo(uniCurricular, aulaOnline.tipoAula, aulasOnline, numAulas,2);
 
         if(uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade == 0)
         {
             mostrarMensagem("Esta unidade curricular nao tem este tipo de aulas",0);
         }
-        else if((uniCurricular.aulasOnline[ aulaOnline.tipoAula].quantidade-quantidadeAulas) <= 0)
+        else if((uniCurricular.aulasOnline[aulaOnline.tipoAula].quantidade-quantidadeAulas) <= 0)
         {
             mostrarMensagem("Esta unidade curricular ja tem todas as aulas deste tipo agendadas",0);
         }

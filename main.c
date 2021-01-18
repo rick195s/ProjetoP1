@@ -83,8 +83,10 @@ int main()
                             system("@cls||clear");
                             for(i=0; i<numUCs; i++)
                             {
-                                listarUC(uniCurriculares[i],1);
+                                listarUC(uniCurriculares[i], aulasOnline, numAulas);
+
                             }
+
 
 
                         }
@@ -149,7 +151,7 @@ int main()
                             }
                             else
                             {
-                                listarInformacoesUCdaAula(aulasOnline,numAulas,uniCurriculares,numUCs);
+                                listarInformacoesUCdaAula(aulasOnline,numAulas,uniCurriculares,numUCs,acessosAulas, numAcessos);
                             }
                             break;
 
@@ -162,7 +164,7 @@ int main()
                             {
                                 for(i=0; i<numAulas; i++)
                                 {
-                                    listarAulasOnline(aulasOnline[i]);
+                                    listarAulaOnline(aulasOnline[i], acessosAulas, numAcessos);
 
                                 }
                             }
