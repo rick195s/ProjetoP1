@@ -10,13 +10,14 @@
 #include "../headers/funcoes_menus.h"
 #include "../headers/funcoes_acessos.h"
 
-void gravarAulaOnline(tipoAulaOnline *aulaOnline)
+void gravarAulaOnline(tipoAulaOnline *aulaOnline, int *numAulasTerminadas)
 {
 
     if(aulaOnline->estado == 1)
     {
         aulaOnline->gravada = 1;
         mostrarMensagem("A aula esta a ser gravda",1);
+        (*numAulasTerminadas)++;
     }
     else
     {
@@ -24,13 +25,14 @@ void gravarAulaOnline(tipoAulaOnline *aulaOnline)
     }
 }
 
-void terminarAulaOnline(tipoAulaOnline *aulaOnline)
+void terminarAulaOnline(tipoAulaOnline *aulaOnline,int *numAulasTerminadas)
 {
 
     if(aulaOnline->estado == 1)
     {
         aulaOnline->estado = 2;
         mostrarMensagem("A aula foi terminada",1);
+        (*numAulasTerminadas)++;
     }
     else
     {
@@ -57,7 +59,7 @@ void iniciarAulaOnline(tipoAulaOnline *aulaOnline)
 
 }
 
-void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
+void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas, int *numAulasTerminadas,int *numAulasGravadas)
 {
 
     char designacao[MAX_STRING],opcao;
@@ -91,10 +93,10 @@ void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas)
                 iniciarAulaOnline(&aulasOnline[posicaoAula]);
                 break;
             case 'T':
-                terminarAulaOnline(&aulasOnline[posicaoAula]);
+                terminarAulaOnline(&aulasOnline[posicaoAula],&(*numAulasTerminadas));
                 break;
             case 'G':
-                gravarAulaOnline(&aulasOnline[posicaoAula]);
+                gravarAulaOnline(&aulasOnline[posicaoAula],&(*numAulasGravadas));
                 break;
             case 'V':
                 break;

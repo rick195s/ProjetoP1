@@ -11,7 +11,7 @@
 
 int main()
 {
-    int numUCs = 0, numAulas = 0,numAcessos=0, i;
+    int numUCs = 0, numAulas = 0,numAcessos = 0,numAulasTerminadas = 0,numAulasGravadas = 0, i;
     char op,opSubMenus;
     tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
     tipoAulaOnline *aulasOnline;
@@ -35,7 +35,7 @@ int main()
 
         do
         {
-            op=menuPrincipal(numUCs, numAcessos);
+            op=menuPrincipal(numUCs, numAcessos,numAulas,numAulasTerminadas,numAulasGravadas);
 
 
             switch(op)
@@ -141,7 +141,7 @@ int main()
                             }
                             else
                             {
-                                administradorAulaOnline(aulasOnline, numAulas);
+                                administradorAulaOnline(aulasOnline, numAulas, &numAulasTerminadas, &numAulasGravadas);
                             }
                             break;
                         case 'Q':
