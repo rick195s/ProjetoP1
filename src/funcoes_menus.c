@@ -95,7 +95,7 @@ char menuPrincipal(int numUCs, int numAcessos, int numAulas,int numAulasTerminad
     printf("\n************************ Menu Principal ************************");
     printf("\n\nU - Inserir, Alterar ou Listar informacoes de UCs");
     printf("\n\nA - Agendar, Alterar, Listar aulas online ou Registar estado de aulas");
-    printf("\n\nE - Inserir, Alterar, Listar informacoes de estudantes ou entrar em aula");
+    printf("\n\nE - Entrar numa aula");
     printf("\n\nF - Fim\n\nOpcao--> ");
 
     scanf("%c", &op);
