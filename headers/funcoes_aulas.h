@@ -2,10 +2,10 @@
 #define FUNCOES_AULAS_H_INCLUDED
 
 #include "constantes.h"
-void gravarAulaOnline(tipoAulaOnline *aulaOnline);
-void terminarAulaOnline(tipoAulaOnline *aulaOnline);
+void gravarAulaOnline(tipoAulaOnline *aulaOnline,int *numAulasGravadas);
+void terminarAulaOnline(tipoAulaOnline *aulaOnline,int *numAulasTerminadas);
 void iniciarAulaOnline(tipoAulaOnline *aulaOnline);
-void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas);
+void administradorAulaOnline(tipoAulaOnline aulasOnline[], int numAulas, int *numAulasTerminadas,int *numAulasGravadas);
 tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipoUnidadeCurricular uniCurriculares[],int numUCs);
 int procurarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING]);
 void lerHorarioCompletoAula(tipoUnidadeCurricular uniCurricular, tipoAulaOnline *aulaOnline, tipoAulaOnline aulasOnline[], int numAulas);

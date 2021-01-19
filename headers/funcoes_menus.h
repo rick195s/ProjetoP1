@@ -6,7 +6,8 @@
 char menuAdministradorAula();
 char menuAulas();
 char menuUC();
-char menuPrincipal(int numUCs, int numAcessos);
+char menuPrincipal(int numUCs, int numAcessos, int numAulas,int numAulasTerminadas,int numAulasGravadas);
+
 
 
 #endif // FUNCOES_MENUS_H_INCLUDED
