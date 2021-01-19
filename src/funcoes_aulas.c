@@ -124,9 +124,18 @@ tipoAulaOnline *editarAulaOnline(tipoAulaOnline aulasOnline[],int *numAulas,tipo
     lerString("\n\nIndique a designacao da aula que pretende alterar: ", designacaoAula, MAX_STRING);
     posicaoAula=procurarDesignacaoAula(aulasOnline,*numAulas,designacaoAula);
 
-    if(posicaoAula == -1)
+    if(posicaoAula == -1 || aulasOnline[posicaoAula].estado == 1 || aulasOnline[posicaoAula].estado == 2)
     {
-        mostrarMensagem("Nao existem aulas com a desginacao igual a que introduziu",0);
+        if(posicaoAula == -1){
+            mostrarMensagem("Nao existem aulas com a desginacao igual a que introduziu",0);
+
+        }else if(aulasOnline[posicaoAula].estado == 1 ){
+            mostrarMensagem("Nao pode editar uma aula que ja esta a decorrer",0);
+
+        }else{
+            mostrarMensagem("Nao pode editar uma aula que ja terminou",0);
+
+        }
     }
     else
     {
