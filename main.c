@@ -30,7 +30,7 @@ int main()
     else
     {
         lerFiheiroBinarioUC(uniCurriculares, &numUCs);
-        aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas);
+        aulasOnline=lerFiheiroBinarioAulasOnline(aulasOnline, &numAulas, &numAulasTerminadas, &numAulasGravadas);
         acessosAulas=lerFicheiroBinarioAcessoAulas(acessosAulas, &numAcessos);
 
         do
