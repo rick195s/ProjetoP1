@@ -2,6 +2,7 @@
 #define FUNCOES_ACESSOS_H_INCLUDED
 #include "constantes.h"
 
+int quantidadeAcessosAula(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAulas[], int numAcessos, int acesso);
 void listarAcessosAulas(tipoAcessoAula acessoAula);
 tipoAcessoAula acrescentarDadosAcesso(tipoAulaOnline aulaOnline);
 tipoAcessoAula *acessoAulaEstudante(tipoAcessoAula acessosAulas[], int *numAcessos, tipoAulaOnline aulasOnline[], int numAulas);

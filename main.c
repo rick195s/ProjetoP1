@@ -91,6 +91,9 @@ int main()
 
                         }
                         break;
+                    case 'R':
+                        rankingUC(uniCurriculares,numUCs,aulasOnline,numAulas, acessosAulas, numAcessos);
+                        break;
                     case 'V':
                         break;
                     default:
@@ -147,11 +150,21 @@ int main()
                         case 'Q':
                             if(numAulas == 0)
                             {
-                                mostrarMensagem("Nao existem aulas para apresentar",0);
+                                mostrarMensagem("Nao existem aulas",0);
                             }
                             else
                             {
                                 listarInformacoesUCdaAula(aulasOnline,numAulas,uniCurriculares,numUCs,acessosAulas, numAcessos);
+                            }
+                            break;
+                        case 'H':
+                            if(numAulas == 0)
+                            {
+                                mostrarMensagem("Nao existem aulas",0);
+                            }
+                            else
+                            {
+                                listarEstudantesPresentes(aulasOnline,numAulas,acessosAulas, numAcessos);
                             }
                             break;
 
