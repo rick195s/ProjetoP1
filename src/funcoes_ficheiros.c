@@ -118,13 +118,16 @@ void adicionarLogTextoAcessoAulas(tipoAcessoAula acessoAula){
     }
 }
 
-tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *numAulas)
+
+
+
+tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[], int *numAulas, int *numAulasTerminadas, int *numAulasGravadas)
 {
 
 
     FILE *ficheiro;
 
-    int erro,numLido;
+    int erro,numLido, i;
     tipoAulaOnline *aux;
 
 
@@ -146,7 +149,7 @@ tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *n
         aulasOnline = realloc(aulasOnline, (*numAulas)*sizeof(tipoAulaOnline));
 
 
-        if(aulasOnline == NULL && *numAulas != 0)
+        if(aulasOnline == NULL)
         {
             mostrarMensagem("Nao foi possivel reservar memoria para as aulas online ao ler ficheiro das aulas",0);
             aulasOnline = aux;
@@ -157,6 +160,14 @@ tipoAulaOnline *lerFiheiroBinarioAulasOnline(tipoAulaOnline aulasOnline[],int *n
             numLido=fread(aulasOnline, sizeof(tipoAulaOnline), *numAulas, ficheiro);
             printf("\n\t\t\tElementos lidos: %d\n", numLido);
 
+            for(i=0;i<*numAulas;i++){
+                if(aulasOnline[i].estado == 2){
+                    (*numAulasTerminadas)++;
+                }
+                if(aulasOnline[i].gravada == 1){
+                    (*numAulasGravadas)++;
+                }
+            }
             erro = fclose(ficheiro);
 
             if(erro != 0)
