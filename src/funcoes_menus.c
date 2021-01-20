@@ -17,7 +17,7 @@ char menuAdministradorAula()
     char op;
 
 
-    printf("\n************************ Administrador da Aula Online ************************");
+    printf("\n--------------------------- Administrador da Aula Online ---------------------------");
 
 
 
@@ -41,7 +41,7 @@ char menuAulas()
     char op;
 
 
-    printf("\n************************ Menu das Aulas Online ************************");
+    printf("\n--------------------------- Menu das Aulas Online ---------------------------");
 
 
 
@@ -49,6 +49,7 @@ char menuAulas()
     printf("\n\nE - Editar agendamento ou eliminar Aula Online");
     printf("\n\nI - Entrar na Aula Online como administrador");
     printf("\n\nQ - Listar Aula Online com informacao da UC");
+    printf("\n\nH - Listar Alunos presentas na Aula Online");
     printf("\n\nL - Listar Todas as Aulas Online");
     printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
@@ -67,13 +68,14 @@ char menuUC()
     char op;
 
 
-    printf("\n************************ Menu Unidade Curriular ************************");
+    printf("\n--------------------------- Menu Unidade Curriular ---------------------------");
 
 
 
     printf("\n\nI - Inserir UCs");
     printf("\n\nA - Alterar UC");
     printf("\n\nL - Listar UC");
+    printf("\n\nR - Ranking de UCs");
     printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);
@@ -92,7 +94,7 @@ char menuPrincipal(int numUCs, int numAcessos, int numAulas,int numAulasTerminad
     printf("\n* Numero de UCs: %d *\t\t\t* Numero de Acessos a aulas: %d\n", numUCs, numAcessos);
     printf("\n* Numero de aulas agendadas: %d *\t* Numero de aulas realizadas: %d \n", numAulas,numAulasTerminadas);
     printf("\n* Numero de aulas gravadas: %d *",numAulasGravadas);
-    printf("\n************************ Menu Principal ************************");
+    printf("\n\n--------------------------- Menu Principal ---------------------------");
     printf("\n\nU - Inserir, Alterar ou Listar informacoes de UCs");
     printf("\n\nA - Agendar, Alterar, Listar aulas online ou Registar estado de aulas");
     printf("\n\nE - Entrar numa aula");

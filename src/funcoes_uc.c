@@ -7,6 +7,83 @@
 #include "../headers/funcoes_ficheiros.h"
 #include "../headers/funcoes_auxiliares.h"
 #include "../headers/funcoes_aulas.h"
+#include "../headers/funcoes_acessos.h"
+
+
+void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int quantidadeAcessosUC[])
+{
+
+    int i,j,posmenor;
+
+    tipoUnidadeCurricular aux;
+
+    for(i=0; i<numUCs-1; i++) /* Percorre vetor */
+    {
+        posmenor=i;
+        for (j=i+1; j<numUCs; j++)
+        {
+            if (quantidadeAcessosUC[j] > quantidadeAcessosUC[posmenor])  /* > para decrescente */
+            {
+                posmenor = j;
+            }
+        }
+        if (posmenor!=i)  /* se existir elemento inferior */
+        {
+            aux=uniCurriculares[posmenor]; /* troca elemento corrente com o menor */
+            uniCurriculares[posmenor]=uniCurriculares[i];
+            uniCurriculares[i]=aux;
+        }
+    }
+
+}
+
+void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAula[], int numAcessos)
+{
+    /*
+    O algoritmo adiciona a quantidade de acessos duma aula da unidade curricular
+    na mesma posicao do vetor "uniCurriculres" no vetor "acessos"
+
+    Ou seja:
+        se existir uma aula que pertença a uma uc a quantidade de acessos a essa
+        aula irá ser armazenada no vetor "acessos" na mesma posicao que a uc esta
+        no vetor uniCurriculares. Quantidade de acessos de uniCurriculares[x]=acessos[x]
+    */
+
+    int i,j,*quantidadeAcessosUC=NULL;
+
+    quantidadeAcessosUC=calloc(numUCs, sizeof(int));
+
+    if(quantidadeAcessosUC == NULL)
+    {
+        mostrarMensagem("Ocorreu um erro ao reservar memoria",0);
+    }
+    else
+    {
+
+        for(i=0; i<numUCs; i++)
+        {
+            for(j=0; j<numAulas; j++)
+            {
+                if(uniCurriculares[i].codigo == aulasOnline[j].codigoUC)
+                {
+                    quantidadeAcessosUC[i]+=quantidadeAcessosAula(aulasOnline[j], acessosAula, numAcessos, 1);
+
+                }
+            }
+        }
+
+        ordenarVetorUC(uniCurriculares, numUCs, quantidadeAcessosUC);
+
+        for(i=0; i<numUCs; i++)
+        {
+            listarUC(uniCurriculares[i],aulasOnline,numAulas);
+        }
+
+        free(quantidadeAcessosUC);
+    }
+
+
+}
 
 void listarUC(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[], int numAulas)
 {
@@ -19,61 +96,67 @@ void listarUC(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[],
     int i;
 
 
+    printf("\n\n---------------------------  Codigo da UC: %d ---------------------------", uniCurricular.codigo);
+    printf("\n\n\tDesignacao: %s", uniCurricular.designacao);
 
-    printf("\n\nDados da UC:");
-    printf("\n\n\tCodigo: %d", uniCurricular.codigo);
-    printf("\n\tDesignacao: %s", uniCurricular.designacao);
     if(uniCurricular.tipoUC == 0)
     {
-        printf("\n\tTipo: obrigatoria");
+        printf("\t\t\tTipo: obrigatoria");
 
     }
     else if(uniCurricular.tipoUC == 1)
     {
-        printf("\n\tTipo: opcional");
+        printf("\t\t\tTipo: opcional");
 
     }
     if(uniCurricular.regime == 0)
     {
-        printf("\n\tRegime: diurno");
+        printf("\n\n\tRegime: diurno");
 
     }
     else if(uniCurricular.regime == 1)
     {
-        printf("\n\tRegime: pos-laboral");
+        printf("\n\n\tRegime: pos-laboral");
 
     }
 
-    printf("\n\tSemestre: %d", uniCurricular.semestre);
-    printf("\n\tTipo de Aulas:");
+    printf("\t\t\t\tSemestre: %d", uniCurricular.semestre);
+    printf("\n\n\tTipo de Aulas:");
     for(i=0; i<TIPOS_AULA; i++)
     {
         if(uniCurricular.aulasOnline[i].quantidade != 0)
         {
 
-            printf("\n\t\t%s:",  uniCurricular.aulasOnline[i].designacao);
-            printf("\n\t\t\tQuantidade de aulas previstas: %d aula(s)",  uniCurricular.aulasOnline[i].quantidade);
-            printf("\n\t\t\tQuantidade de aulas agendadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,1));
-            printf("\n\t\t\tQuantidade de aulas realizadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,0));
-            printf("\n\t\t\tDuracao: %d minuto(s)",  uniCurricular.aulasOnline[i].duracao );
+            printf("\n\n\t\t%s:",  uniCurricular.aulasOnline[i].designacao);
+            printf("\n\t\t\tAulas previstas: %d aula(s)",  uniCurricular.aulasOnline[i].quantidade);
+            printf("\t\tAulas agendadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,1));
+            printf("\n\t\t\tAulas realizadas: %d aula(s)",  quantidadeAulasTipo(uniCurricular,i,aulasOnline,numAulas,0));
+            printf("\t\tDuracao: %d minuto(s)",  uniCurricular.aulasOnline[i].duracao );
 
         }
 
     }
 
-    for(i=0;i<numAulas;i++){
-        if(aulasOnline[i].codigoUC == uniCurricular.codigo && aulasOnline[i].estado == 0){
-            if(aulasOnline[i].tipoAula == 0){
-                printf("\n\n\tTipo da Aula: T");
+    for(i=0; i<numAulas; i++)
+    {
+        if(aulasOnline[i].codigoUC == uniCurricular.codigo && aulasOnline[i].estado == 0)
+        {
+            if(aulasOnline[i].tipoAula == 0)
+            {
+                printf("\n\n\tTipo da Aula -> T");
 
-            }else if(aulasOnline[i].tipoAula == 1){
-                printf("\n\n\tTipo da Aula: TP");
-
-            }else{
-                printf("\n\n\tTipo da Aula: PL");
             }
-            printf("\n\n\tData: %d/%d/%d", aulasOnline[i].data.dia,aulasOnline[i].data.mes,aulasOnline[i].data.ano);
-            printf("\n\n\tHora de Inicio: %.2f", aulasOnline[i].horaInicio);
+            else if(aulasOnline[i].tipoAula == 1)
+            {
+                printf("\n\n\tTipo da Aula -> TP");
+
+            }
+            else
+            {
+                printf("\n\n\tTipo da Aula -> PL");
+            }
+            printf("\t\t\tData -> %d/%d/%d", aulasOnline[i].data.dia,aulasOnline[i].data.mes,aulasOnline[i].data.ano);
+            printf("\t\t\tHora de Inicio -> %.2f", aulasOnline[i].horaInicio);
         }
     }
 

@@ -10,6 +10,33 @@
 #include "../headers/funcoes_menus.h"
 #include "../headers/funcoes_acessos.h"
 
+
+void listarEstudantesPresentes(tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAulas[], int numAcessos){
+
+    char desginacao[MAX_STRING];
+    int i,posicaoAula;
+
+    lerString("\n\nInsira a designacao da aula: ", desginacao, MAX_STRING);
+    posicaoAula=procurarDesignacaoAula(aulasOnline, numAulas, desginacao);
+
+     if(posicaoAula == -1)
+    {
+        mostrarMensagem("Nao existe nenhuma aula com a designacao que inseriu",0);
+    }
+    else
+    {
+
+        printf("\n\n--------------------------- Estudantes Presentes na aula %s ---------------------------", aulasOnline[posicaoAula].designacao);
+        for(i=0;i<numAcessos;i++){
+            if(strcmp(acessosAulas[i].designacaoAula, desginacao) == 0 && acessosAulas[i].tipoAcesso == 0){
+                printf("\n\nNumero do estudante -> %d", acessosAulas[i].numeroEstudante);
+            }
+        }
+
+    }
+
+}
+
 void gravarAulaOnline(tipoAulaOnline *aulaOnline, int *numAulasTerminadas)
 {
 
@@ -204,12 +231,12 @@ void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoU
         posicaoUC=procurarUC(aulasOnline[posicaoAula].codigoUC,uniCurriculares,numUCs);
         listarAulaOnline(aulasOnline[posicaoAula],acessosAula, numAcessos);
 
-        printf("\n\nInformacoes da UC:");
-        printf("\n\n\tDesginacao: %s", uniCurriculares[posicaoUC].designacao);
-        printf("\n\n\tQuantidade de Aulas por agendar: ");
+        printf("\n\n\tInformacoes da UC:");
+        printf("\n\n\t\tDesginacao: %s", uniCurriculares[posicaoUC].designacao);
+        printf("\n\n\t\tQuantidade de Aulas por agendar: ");
         for(i=0; i<TIPOS_AULA; i++)
         {
-            printf("\n\n\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[i].designacao, (uniCurriculares[posicaoUC].aulasOnline[i].quantidade-quantidadeAulasTipo(uniCurriculares[posicaoUC],i,aulasOnline,numAulas,0)));
+            printf("\n\n\t\t\t%s: %d", uniCurriculares[posicaoUC].aulasOnline[i].designacao, (uniCurriculares[posicaoUC].aulasOnline[i].quantidade-quantidadeAulasTipo(uniCurriculares[posicaoUC],i,aulasOnline,numAulas,0)));
         }
     }
 
@@ -219,37 +246,9 @@ void listarAulaOnline(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAula[], i
 {
     int i, acessoGravacoes=0, estudantesPresent=0;
 
-    printf("\n\nDesignacao da Aula: %s", aulaOnline.designacao);
+    printf("\n\n---------------------------  Designacao da Aula: %s ---------------------------", aulaOnline.designacao);
     printf("\n\n\tCodigo da UC: %d", aulaOnline.codigoUC);
-    printf("\n\n\tNome do Docente: %s", aulaOnline.nomeDocente);
-    printf("\n\n\tData:\n\t\tHora de Inicio: %.2f", aulaOnline.horaInicio);
-    printf("\n\n\t\tHora de Fim: %.2f", aulaOnline.horaFim);
-    printf("\n\n\t\t%d/%d/%d", aulaOnline.data.dia, aulaOnline.data.mes, aulaOnline.data.ano);
-    if(aulaOnline.estado == 0)
-    {
-        printf("\n\n\tEstado: Agendada");
-    }
-    else if(aulaOnline.estado == 1)
-    {
-        printf("\n\n\tEstado: A decorrer");
-    }
-    else
-    {
-        printf("\n\n\tEstado: Terminada");
-
-        for(i=0;i<numAcessos;i++){
-
-            if(strcmp(acessosAula[i].designacaoAula,aulaOnline.designacao)==0){
-                if(acessosAula[i].tipoAcesso == 0){
-                    estudantesPresent++;
-                }else{
-                    acessoGravacoes++;
-                }
-            }
-        }
-        printf("\n\n\tQuantidade de alunos presentes: %d", estudantesPresent);
-        printf("\n\n\tQuantidade de acessos as gravacoes: %d", acessoGravacoes);
-    }
+    printf("\t\t\tNome do Docente: %s", aulaOnline.nomeDocente);
 
 
     if(aulaOnline.gravada == 0)
@@ -261,6 +260,37 @@ void listarAulaOnline(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAula[], i
         printf("\n\n\tGravada: Sim");
     }
 
+    if(aulaOnline.estado == 0)
+    {
+        printf("\t\t\t\tEstado: Agendada");
+    }
+    else if(aulaOnline.estado == 1)
+    {
+        printf("\t\t\t\tEstado: A decorrer");
+    }
+    else
+    {
+        printf("\t\t\t\tEstado: Terminada");
+
+        for(i=0;i<numAcessos;i++){
+
+            if(strcmp(acessosAula[i].designacaoAula,aulaOnline.designacao)==0){
+                if(acessosAula[i].tipoAcesso == 0){
+                    estudantesPresent++;
+                }else{
+                    acessoGravacoes++;
+                }
+            }
+        }
+        printf("\n\n\tAlunos presentes: %d", estudantesPresent);
+        printf("\t\t\tAcessos as gravacoes: %d", acessoGravacoes);
+    }
+
+
+
+    printf("\n\n\tData:\n\t\tHora de Inicio: %.2f", aulaOnline.horaInicio);
+    printf("\n\n\t\tHora de Fim: %.2f", aulaOnline.horaFim);
+    printf("\n\n\t\t%d/%d/%d", aulaOnline.data.dia, aulaOnline.data.mes, aulaOnline.data.ano);
 }
 
 int procurarDesignacaoAula(tipoAulaOnline aulasOnline[], int numAulas, char designacao[MAX_STRING])
