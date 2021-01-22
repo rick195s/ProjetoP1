@@ -10,10 +10,11 @@
 #include "../headers/funcoes_acessos.h"
 
 
+
 void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int quantidadeAcessosUC[])
 {
 
-    int i,j,posmenor;
+    int i,j,posmenor, auxQuantidades;
 
     tipoUnidadeCurricular aux;
 
@@ -29,6 +30,9 @@ void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int qua
         }
         if (posmenor!=i)  /* se existir elemento inferior */
         {
+            auxQuantidades=quantidadeAcessosUC[posmenor];
+            quantidadeAcessosUC[posmenor]=quantidadeAcessosUC[i];
+            quantidadeAcessosUC[i]=auxQuantidades;
             aux=uniCurriculares[posmenor]; /* troca elemento corrente com o menor */
             uniCurriculares[posmenor]=uniCurriculares[i];
             uniCurriculares[i]=aux;
@@ -37,6 +41,7 @@ void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int qua
 
 }
 
+
 void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAula[], int numAcessos)
 {
     /*
@@ -44,8 +49,8 @@ void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnli
     na mesma posicao do vetor "uniCurriculres" no vetor "acessos"
 
     Ou seja:
-        se existir uma aula que pertenÁa a uma uc a quantidade de acessos a essa
-        aula ir· ser armazenada no vetor "acessos" na mesma posicao que a uc esta
+        se existir uma aula que perten√ßa a uma uc a quantidade de acessos a essa
+        aula ir√° ser armazenada no vetor "acessos" na mesma posicao que a uc esta
         no vetor uniCurriculares. Quantidade de acessos de uniCurriculares[x]=acessos[x]
     */
 
@@ -89,8 +94,8 @@ void listarUC(tipoUnidadeCurricular uniCurricular, tipoAulaOnline aulasOnline[],
 {
 
     /*
-    Caso a funÁ„o receba por parametro a vari·vel "detalhes" com o valor 1
-    a funÁ„o ir· mostrar mais detalhes relativos ‡ unidade curricular
+    Caso a fun√ß√£o receba por parametro a vari√°vel "detalhes" com o valor 1
+    a fun√ß√£o ir√° mostrar mais detalhes relativos √† unidade curricular
     */
 
     int i;
@@ -166,8 +171,8 @@ int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs
 {
 
     /*
-    Esta funÁ„o devolve a posiÁ„o onde se encontra a unidade curricular com o codigo recebido
-    pelo argumento "codigoUC" ou -1 caso n„o encontre
+    Esta fun√ß√£o devolve a posi√ß√£o onde se encontra a unidade curricular com o codigo recebido
+    pelo argumento "codigoUC" ou -1 caso n√£o encontre
     */
 
 
@@ -197,10 +202,10 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     system("@cls||clear");
     codigo=lerInteiro("\n\nInsira o codigo da UC que pretende alterar",1000,9999);
     /*
-    Ao chamar a funÁ„o "procurarUC" È possÌvel guardar a UC que foi encontra
-    no primeiro argumento dessa mesma funÁ„o mas neste caso como n„o È
-    pretendida essa alteraÁ„o È enviada uma variavÈl qualquer do tipoUnidadeCurricular
-    para a funÁ„o, sendo que ela n„o vai ser alterada.
+    Ao chamar a fun√ß√£o "procurarUC" √© poss√≠vel guardar a UC que foi encontra
+    no primeiro argumento dessa mesma fun√ß√£o mas neste caso como n√£o √©
+    pretendida essa altera√ß√£o √© enviada uma variav√©l qualquer do tipoUnidadeCurricular
+    para a fun√ß√£o, sendo que ela n√£o vai ser alterada.
     */
     posicao=procurarUC(codigo, uniCurriculares, numUCs);
     if(posicao != -1)
@@ -208,8 +213,8 @@ void alterarUC(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         //Mostra a unidade curricular que foi encontrada
 
         /*
-        Guarda o cÛdigo da unidade curricular numa variavel local para depois
-        de a mesma ser alterada continuar com o mesmo cÛdigo
+        Guarda o c√≥digo da unidade curricular numa variavel local para depois
+        de a mesma ser alterada continuar com o mesmo c√≥digo
         */
         codigo=uniCurriculares[posicao].codigo;
         uniCurriculares[posicao]=lerDadosUC();
@@ -230,8 +235,8 @@ int gerarCodigoUnico(tipoUnidadeCurricular uniCurriculares[], int numUCs)
     srand(time(NULL));
     int codigo, unico,i;
 
-    /*Caso exista uma UC com o codigo igual ao gerado o programa ir·
-    continuar a gerar atÈ n„o haver cÛdigos de UCs iguais
+    /*Caso exista uma UC com o codigo igual ao gerado o programa ir√°
+    continuar a gerar at√© n√£o haver c√≥digos de UCs iguais
     */
 
     do
@@ -259,7 +264,7 @@ void lerUCTipoAulas(tipoAulas tipoAulas[])
 
     int j;
     /*
-    Nesta parte do cÛdigo È copiado para o campo do vetor "designacao" os caracteres
+    Nesta parte do c√≥digo √© copiado para o campo do vetor "designacao" os caracteres
     que representam os tipos de aula existentes
     */
 
@@ -271,8 +276,8 @@ void lerUCTipoAulas(tipoAulas tipoAulas[])
     for(j=0; j<TIPOS_AULA; j++)
     {
 
-        /*Se o utilizador indicar que n„o existem aulas, ou seja inserir 0, para um tipo de aula
-        a duracao da mesma ter· um valor aleatÛrio */
+        /*Se o utilizador indicar que n√£o existem aulas, ou seja inserir 0, para um tipo de aula
+        a duracao da mesma ter√° um valor aleat√≥rio */
         printf("\n\nIndique a quantidade de aulas de %s da UC", tipoAulas[j].designacao );
         tipoAulas[j].quantidade = lerInteiro("",0,MAX_AULAS_POR_TIPO);
 
@@ -321,8 +326,8 @@ int inserirUCs(tipoUnidadeCurricular uniCurriculares[], int numUCs)
         printf("\n\nUC numero %d", i+1 );
         uniCurriculares[up_numUCs] = lerDadosUC();
 
-        /*O ccdigo da UC sÛ È gerada apÛs a introduÁ„o dos dados pelo utilizador
-        para esse campo n„o ser alterado com dados aleatÛrios que estejam na memÛria*/
+        /*O ccdigo da UC s√≥ √© gerada ap√≥s a introdu√ß√£o dos dados pelo utilizador
+        para esse campo n√£o ser alterado com dados aleat√≥rios que estejam na mem√≥ria*/
 
         uniCurriculares[up_numUCs].codigo = gerarCodigoUnico(uniCurriculares, up_numUCs);
         up_numUCs++;
