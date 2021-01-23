@@ -41,7 +41,6 @@ void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int qua
 
 }
 
-
 void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAula[], int numAcessos)
 {
     /*
