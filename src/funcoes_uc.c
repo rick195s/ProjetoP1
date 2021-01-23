@@ -81,6 +81,7 @@ void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnli
 
         for(i=0; i<numUCs; i++)
         {
+            printf("\n\n%d", quantidadeAcessosUC[i]);
             listarUC(uniCurriculares[i],aulasOnline,numAulas);
         }
 

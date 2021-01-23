@@ -8,6 +8,7 @@
 #include "../headers/funcoes_aulas.h"
 #include "../headers/funcoes_ficheiros.h"
 
+
 int quantidadeAcessosAula(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAulas[], int numAcessos, int acesso)
 {
     /*
@@ -50,6 +51,11 @@ void listarAcessosAulas(tipoAcessoAula acessoAula)
 
 tipoAcessoAula acrescentarDadosAcesso( tipoAulaOnline aulaOnline)
 {
+    /*
+    Esta funcao tem a responsabilidade de registar um novo acesso a
+    uma aula quando o estudante entra numa, corresponde a quando um
+    aluno entra numa aula
+    */
 
     tipoAcessoAula acessoAula;
 
@@ -84,6 +90,13 @@ tipoAcessoAula *acessoAulaEstudante(tipoAcessoAula acessosAulas[], int *numAcess
 
     if(posicaoAula == -1 || aulasOnline[posicaoAula].estado == 0 || (aulasOnline[posicaoAula].estado == 2 && aulasOnline[posicaoAula].gravada == 0 ))
     {
+        /*
+        Caso nao seja encontrada nenhuma aula com a designacao que o utilizador
+        inseriu ou a aula a que o estundante pretende já terminou e nao foi gravada
+        ou a aula ainda nao foi iniciada o programa entra nesta condicao mostrando
+        as respetivas mensagens de erro
+        */
+
         if(posicaoAula == -1)
         {
             mostrarMensagem("Nao existe nenhuma aula com a desginacao que introduziu",0);
@@ -113,6 +126,7 @@ tipoAcessoAula *acessoAulaEstudante(tipoAcessoAula acessosAulas[], int *numAcess
 
             acessosAulas[*numAcessos] = acrescentarDadosAcesso(aulasOnline[posicaoAula]);
             (*numAcessos)++;
+
         }
     }
 

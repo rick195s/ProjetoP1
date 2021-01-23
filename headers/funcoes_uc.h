@@ -3,6 +3,7 @@
 
 #include "constantes.h"
 
+void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int quantidadeAcessosUC[]);
 void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAula[], int numAcessos);
 void listarUC(tipoUnidadeCurricular uniCurricular,tipoAulaOnline aulasOnline[], int numAulas);
 int procurarUC(int codigoUC, tipoUnidadeCurricular uniCurriculares[], int numUCs);

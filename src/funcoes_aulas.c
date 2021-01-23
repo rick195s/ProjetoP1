@@ -10,7 +10,6 @@
 #include "../headers/funcoes_menus.h"
 #include "../headers/funcoes_acessos.h"
 
-
 void listarEstudantesPresentes(tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAulas[], int numAcessos){
 
     char desginacao[MAX_STRING];
@@ -22,6 +21,7 @@ void listarEstudantesPresentes(tipoAulaOnline aulasOnline[], int numAulas, tipoA
      if(posicaoAula == -1)
     {
         mostrarMensagem("Nao existe nenhuma aula com a designacao que inseriu",0);
+
     }
     else
     {
@@ -30,10 +30,12 @@ void listarEstudantesPresentes(tipoAulaOnline aulasOnline[], int numAulas, tipoA
         for(i=0;i<numAcessos;i++){
             if(strcmp(acessosAulas[i].designacaoAula, desginacao) == 0 && acessosAulas[i].tipoAcesso == 0){
                 printf("\n\nNumero do estudante -> %d", acessosAulas[i].numeroEstudante);
+
             }
         }
 
     }
+
 
 }
 

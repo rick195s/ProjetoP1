@@ -8,6 +8,7 @@
 #include "headers/funcoes_uc.h"
 #include "headers/funcoes_acessos.h"
 #include "headers/funcoes_auxiliares.h"
+#include "headers/funcoes_estatisticas.h"
 
 int main()
 {
@@ -199,12 +200,35 @@ int main()
                 system("@cls||clear");
                 acessosAulas=acessoAulaEstudante(acessosAulas, &numAcessos, aulasOnline, numAulas);
                 break;
-            case 'D':
-                system("@cls||clear");
-                for(i=0; i<numAcessos; i++)
+
+            case 'L':
+                /*
+                Menu das estatisticas selecionado
+                */
+                do
                 {
-                    listarAcessosAulas(acessosAulas[i]);
+                    opSubMenus = menuEstatisticas(uniCurriculares,numUCs, aulasOnline, numAulas, acessosAulas, numAcessos);
+                    switch(opSubMenus)
+                    {
+                     case 'Q':
+                         if(numUCs-1>0){
+                            listarUCMenosAulasOnline(uniCurriculares,numUCs, aulasOnline, numAulas);
+                         }else{
+                             mostrarMensagem("Nao existem unidades curriculares para apresentar",0);
+                         }
+                        break;
+                    case 'V':
+                        break;
+                    default:
+                        mostrarMensagem("Opcao invalida",0);
+
+                    }
+
+
                 }
+                while(opSubMenus!='V');
+
+
                 break;
             case 'F':
                 break;
