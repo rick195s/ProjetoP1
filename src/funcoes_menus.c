@@ -16,15 +16,21 @@
 char menuEstatisticas(tipoUnidadeCurricular uniCurriculres[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAulas[], int numAcessos)
 {
 
-    char op;
+    char op, tipoDeAula[MAX_STRING];
     float mediaPesencas;
+    int percentagemUCsGravadas;
 
     mediaPesencas=mediaDePresencasAula(aulasOnline, numAulas, acessosAulas, numAcessos);
+    percentagemUCsGravadas=percentagemUCsAulasGravadas(uniCurriculres, numUCs, aulasOnline, numAulas);
+    tipoAulaGravacoes(aulasOnline,numAulas,acessosAulas,numAcessos,tipoDeAula);
+
     printf("\n--------------------------- Estatisticas ---------------------------");
 
+    printf("\n\nTipo de Aulas com mais acessos as gravacoes: %s",tipoDeAula);
     printf("\n\nMedia de presencas por cada aula realizada: %.2f",mediaPesencas);
+    printf("\n\nPercentagem de UCs com aulas gravadas: %d%%",percentagemUCsGravadas);
     printf("\n\nQ - Mostrar UCs com menor quantidade de aulas online realizadas");
-    printf("\n\nR - Mostrar aulas online realizadas há mais tempo");
+    printf("\n\nR - Mostrar aulas online realizadas ha mais tempo");
     printf("\n\nV - Voltar atras\n\nOpcao--> ");
 
     scanf("%c", &op);

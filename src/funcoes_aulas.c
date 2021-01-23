@@ -246,7 +246,7 @@ void listarInformacoesUCdaAula(tipoAulaOnline aulasOnline[], int numAulas, tipoU
 
 void listarAulaOnline(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAula[], int numAcessos)
 {
-    int i, acessoGravacoes=0, estudantesPresent=0;
+    int acessoGravacoes=0, estudantesPresent=0;
 
     printf("\n\n---------------------------  Designacao da Aula: %s ---------------------------", aulaOnline.designacao);
     printf("\n\n\tCodigo da UC: %d", aulaOnline.codigoUC);
@@ -274,16 +274,9 @@ void listarAulaOnline(tipoAulaOnline aulaOnline, tipoAcessoAula acessosAula[], i
     {
         printf("\t\t\t\tEstado: Terminada");
 
-        for(i=0;i<numAcessos;i++){
+        estudantesPresent=quantidadeAcessosAula(aulaOnline, acessosAula, numAcessos,0);
+        acessoGravacoes=quantidadeAcessosAula(aulaOnline, acessosAula, numAcessos,1);
 
-            if(strcmp(acessosAula[i].designacaoAula,aulaOnline.designacao)==0){
-                if(acessosAula[i].tipoAcesso == 0){
-                    estudantesPresent++;
-                }else{
-                    acessoGravacoes++;
-                }
-            }
-        }
         printf("\n\n\tAlunos presentes: %d", estudantesPresent);
         printf("\t\t\tAcessos as gravacoes: %d", acessoGravacoes);
     }
