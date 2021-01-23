@@ -13,7 +13,7 @@
 void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int quantidadeAcessosUC[])
 {
 
-    int i,j,posmenor;
+    int i,j,posmenor, auxQuantidades;
 
     tipoUnidadeCurricular aux;
 
@@ -29,6 +29,9 @@ void ordenarVetorUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, int qua
         }
         if (posmenor!=i)  /* se existir elemento inferior */
         {
+            auxQuantidades=quantidadeAcessosUC[posmenor];
+            quantidadeAcessosUC[posmenor]=quantidadeAcessosUC[i];
+            quantidadeAcessosUC[i]=auxQuantidades;
             aux=uniCurriculares[posmenor]; /* troca elemento corrente com o menor */
             uniCurriculares[posmenor]=uniCurriculares[i];
             uniCurriculares[i]=aux;
@@ -76,6 +79,7 @@ void rankingUC(tipoUnidadeCurricular uniCurriculares[], int numUCs, tipoAulaOnli
 
         for(i=0; i<numUCs; i++)
         {
+            printf("\n\n%d", quantidadeAcessosUC[i]);
             listarUC(uniCurriculares[i],aulasOnline,numAulas);
         }
 

@@ -3,6 +3,7 @@
 
 #include "constantes.h"
 
+char menuEstatisticas(tipoUnidadeCurricular uniCurriculres[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAulas[], int numAcessos);
 char menuAdministradorAula();
 char menuAulas();
 char menuUC();
