@@ -12,7 +12,7 @@
 
 int main()
 {
-    int numUCs = 0, numAulas = 0,numAcessos = 0,numAulasTerminadas = 0,numAulasGravadas = 0, i;
+    int i, numUCs = 0, numAulas = 0,numAcessos = 0,numAulasTerminadas = 0,numAulasGravadas = 0, numAulasRealizadas=0, quantasListar;
     char op,opSubMenus;
     tipoUnidadeCurricular uniCurriculares[MAX_UC] = {0};
     tipoAulaOnline *aulasOnline;
@@ -87,9 +87,6 @@ int main()
                                 listarUC(uniCurriculares[i], aulasOnline, numAulas);
 
                             }
-
-
-
                         }
                         break;
                     case 'R':
@@ -210,12 +207,44 @@ int main()
                     opSubMenus = menuEstatisticas(uniCurriculares,numUCs, aulasOnline, numAulas, acessosAulas, numAcessos);
                     switch(opSubMenus)
                     {
-                     case 'Q':
-                         if(numUCs-1>0){
+                    case 'Q':
+                        if(numUCs-1 > 0)
+                        {
                             listarUCMenosAulasOnline(uniCurriculares,numUCs, aulasOnline, numAulas);
-                         }else{
-                             mostrarMensagem("Nao existem unidades curriculares para apresentar",0);
-                         }
+                        }
+                        else
+                        {
+                            mostrarMensagem("E necessario que haja mais que uma unidade curricular para selecionar esta opcao",0);
+                        }
+                        break;
+                    case 'R':
+                        /*
+                        Este ciclo irá calcular o numero total de aulas que foram realizadas
+                        */
+                        numAulasRealizadas=0;
+
+                        for(i=0; i<numAulas; i++)
+                        {
+                            if(aulasOnline[i].estado == 2)
+                            {
+                                numAulasRealizadas++;
+                            }
+                        }
+                        if(numAulasRealizadas > 0)
+                        {
+                            quantasListar=lerInteiro("\n\nInsira quantas aulas realizadas ha mais tempo quer listar", 1, numAulasRealizadas);
+                            ordenarAulaAntigas(aulasOnline, numAulas);
+
+                            for(i=0; i<quantasListar; i++)
+                            {
+                                listarAulaOnline(aulasOnline[i], acessosAulas,numAcessos);
+                            }
+
+                        }
+                        else
+                        {
+                            mostrarMensagem("Nao existem aulas realizadas",0);
+                        }
                         break;
                     case 'V':
                         break;
@@ -241,6 +270,7 @@ int main()
         escreverLogBinarioAcessosAulas(acessosAulas, numAcessos);
         escreverFiheiroBinarioUC(uniCurriculares, numUCs);
         escreverFiheiroBinarioAulasOnline(aulasOnline, numAulas);
+        free(acessosAulas);
         free(aulasOnline);
     }
 

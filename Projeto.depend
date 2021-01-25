@@ -237,7 +237,7 @@
 	"../headers/funcoes_menus.h"
 	"../headers/funcoes_acessos.h"
 
-1611356426 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\main.c
+1611588941 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"headers/funcoes_menus.h"
@@ -249,30 +249,30 @@
 	"headers/funcoes_auxiliares.h"
 	"headers/funcoes_estatisticas.h"
 
-1611356277 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_menus.h
+1611579971 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_menus.h
 	"constantes.h"
 
-1610534500 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\constantes.h
+1611583211 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\constantes.h
 
-1611318385 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_ficheiros.h
+1611579780 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_ficheiros.h
 	"constantes.h"
 
-1611318385 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_aulas.h
+1611589650 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_aulas.h
 	"constantes.h"
 
-1611318385 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_uc.h
+1611579944 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_uc.h
 	"constantes.h"
 
-1610632244 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_auxiliares.c
+1611529361 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_auxiliares.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	"../headers/funcoes_auxiliares.h"
 
-1610632244 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_auxiliares.h
+1611579217 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_auxiliares.h
 	"../headers/constantes.h"
 
-1611318385 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_ficheiros.c
+1611426528 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_ficheiros.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -280,7 +280,7 @@
 	"../headers/funcoes_ficheiros.h"
 	"../headers/funcoes_auxiliares.h"
 
-1611356605 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_menus.c
+1611434963 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_menus.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -290,8 +290,9 @@
 	"../headers/funcoes_auxiliares.h"
 	"../headers/funcoes_ficheiros.h"
 	"../headers/constantes.h"
+	"../headers/funcoes_estatisticas.h"
 
-1611321248 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_uc.c
+1611430153 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_uc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -302,7 +303,7 @@
 	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_acessos.h"
 
-1611318385 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_aulas.c
+1611588030 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_aulas.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -338,10 +339,10 @@
 	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_ficheiros.h"
 
-1611356458 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_acessos.h
+1611579183 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_acessos.h
 	"constantes.h"
 
-1611356549 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_acessos.c
+1611426528 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_acessos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -351,7 +352,7 @@
 	"../headers/funcoes_aulas.h"
 	"../headers/funcoes_ficheiros.h"
 
-1611356205 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_estatisticas.c
+1611436428 source:c:\users\ricar\onedrive - ipleiria\p1\projetop1\src\funcoes_estatisticas.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -363,7 +364,7 @@
 	"../headers/funcoes_acessos.h"
 	"../headers/funcoes_estatisticas.h"
 
-1611356226 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_estatisticas.h
+1611579528 c:\users\ricar\onedrive - ipleiria\p1\projetop1\headers\funcoes_estatisticas.h
 
 1611434694 c:\users\ricar_yd80u\onedrive - ipleiria\p1\projetop1\headers\funcoes_estatisticas.h
 

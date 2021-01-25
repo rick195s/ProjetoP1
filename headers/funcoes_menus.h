@@ -3,6 +3,9 @@
 
 #include "constantes.h"
 
+/*
+FUNCOES DOS RESOETIVOS MENUS
+*/
 char menuEstatisticas(tipoUnidadeCurricular uniCurriculres[], int numUCs, tipoAulaOnline aulasOnline[], int numAulas, tipoAcessoAula acessosAulas[], int numAcessos);
 char menuAdministradorAula();
 char menuAulas();
