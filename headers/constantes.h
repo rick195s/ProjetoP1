@@ -11,7 +11,9 @@
 #define MAX_DURACAO_AULA_POS_LABORAL 240
 #define MAX_AULAS_POR_TIPO 150
 
-
+/*
+ESTRUTUA DOS ACESSOS A UMA AULA
+*/
 typedef struct{
 
     int numeroEstudante;
@@ -20,20 +22,9 @@ typedef struct{
 
 }tipoAcessoAula;
 
-typedef struct{
-
-    int codigoAula;
-    int numeroAluno;
-
-}tipoAcessoGravacoes;
-
-typedef struct{
-
-    int hora;
-    int minutos;
-
-}tipoHora;
-
+/*
+ESTRUTURA DA DATA
+*/
 typedef struct
 {
 
@@ -43,6 +34,9 @@ typedef struct
 
 } tipoData;
 
+/*
+ESTRUTURA DE UM TIPO DE AULAS
+*/
 typedef struct
 {
     char designacao[MAX_STRING];
@@ -51,6 +45,10 @@ typedef struct
 
 } tipoAulas;
 
+
+/*
+ESTRUTURA DAS AULAS ONLINE
+*/
 typedef struct
 {
 
@@ -67,6 +65,10 @@ typedef struct
 
 } tipoAulaOnline;
 
+
+/*
+ESTRUTURA DAS UNIDADES CURRICULARES
+*/
 typedef struct
 {
 
@@ -79,11 +81,5 @@ typedef struct
 
 } tipoUnidadeCurricular;
 
-typedef struct
-{
-    char nome[MAX_STRING];
-    int numero;
-
-} tipoEstudante;
 
 #endif // CONSTANTES_H_INCLUDED

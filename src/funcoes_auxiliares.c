@@ -9,9 +9,9 @@ void mostrarMensagem(char mensagem[MAX_STRING], int tipo){
 
     system("@cls||clear");
     if(tipo == 1){
-        printf("\nSucesso:");
+        printf("\n\tSucesso:");
     }else{
-        printf("\nErro:");
+        printf("\n\tErro:");
     }
     printf("\n\n\t\t%s\n\n\n", mensagem);
 }
@@ -138,7 +138,6 @@ tipoData lerData(void)
 
     return data;
 }
-
 
 void limpaBufferStdin(void)
 {
